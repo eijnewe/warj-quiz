@@ -23,6 +23,11 @@ export function Header() {
               <Link to="/quiz">Quiz</Link>
             </NavigationMenuLink>
           </NavigationMenuItem>
+          <NavigationMenuItem>
+            <NavigationMenuLink asChild>
+              <Link to="/quiz/history">Previous Results</Link>
+            </NavigationMenuLink>
+          </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
       <ModeToggle></ModeToggle>
