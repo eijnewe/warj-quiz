@@ -1,14 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { Button } from '@/components/ui/button'
-import { Link } from '@tanstack/react-router'
-
-import {
-  ButtonGroup,
-  ButtonGroupSeparator,
-  ButtonGroupText,
-} from '@/components/ui/button-group'
-import { Button } from '@/components/ui/button'
-import { ArrowLeft, ArrowRight, RotateCcw } from 'lucide-react'
+import { ArrowLeft, RotateCcw } from 'lucide-react'
 import { Progress } from '@/components/ui/progress'
 import { useState } from 'react'
 import {
