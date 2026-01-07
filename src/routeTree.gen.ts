@@ -65,14 +65,16 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/quiz/history' | '/quiz/results' | '/quiz'
+  fullPaths: '/' | '/quiz/history' | '/quiz/results' | '/quiz/test' | '/quiz'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/quiz/history' | '/quiz/results' | '/quiz'
-  id: '__root__' | '/' | '/quiz/history' | '/quiz/results' | '/quiz/'
-  fullPaths: '/' | '/quiz/results' | '/quiz/test' | '/quiz'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/quiz/results' | '/quiz/test' | '/quiz'
-  id: '__root__' | '/' | '/quiz/results' | '/quiz/test' | '/quiz/'
+  to: '/' | '/quiz/history' | '/quiz/results' | '/quiz/test' | '/quiz'
+  id:
+    | '__root__'
+    | '/'
+    | '/quiz/history'
+    | '/quiz/results'
+    | '/quiz/test'
+    | '/quiz/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {

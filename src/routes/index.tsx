@@ -27,7 +27,7 @@ function RouteComponent() {
       <p className='text-xs'>
         Har du redan gjort quizzet?
         <br />
-        Se dina <Link to="/quiz/results" className='underline'>tidigare resultat här</Link>
+        Se dina <Link to="/quiz/history" className='underline'>tidigare resultat här</Link>
       </p>
     </div>
   </>
