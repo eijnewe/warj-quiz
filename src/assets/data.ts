@@ -1,4 +1,4 @@
-type Personality = {
+export type Personality = {
   id: string;
   name: string;
   description: string;
@@ -83,3 +83,7 @@ export const questions: Question[] = [
   }
 
 ]
+
+export function getPersonalityById(id: string): Personality | undefined {
+  return personalities.find(p => p.id === id);
+}
