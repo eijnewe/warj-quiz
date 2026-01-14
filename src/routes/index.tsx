@@ -1,3 +1,4 @@
+import { GetRandomImage } from '@/components/random-img'
 import { Button } from '@/components/ui/button'
 import { createFileRoute } from '@tanstack/react-router'
 import { Link } from '@tanstack/react-router'
@@ -16,9 +17,7 @@ function RouteComponent() {
       <p>
         Vilken varg är du?
       </p>
-      <p>
-        * Import random img component here *
-      </p>
+      <GetRandomImage />
       <Link to="/quiz">
         <Button variant={"outline"} className='uppercase cursor-pointer'>
           Gör varg-quizzet!

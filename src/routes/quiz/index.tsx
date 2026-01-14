@@ -1,6 +1,6 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
+import { createFileRoute, Link, useRouter } from '@tanstack/react-router'
 import { Button } from '@/components/ui/button'
-import { ArrowLeft, RotateCcw } from 'lucide-react'
+import { ArrowLeft, Pointer, RotateCcw } from 'lucide-react'
 import { Progress } from '@/components/ui/progress'
 import { useState } from 'react'
 import {
@@ -9,7 +9,8 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip'
 import { QuestionComponent } from '@/components/question-component'
-import { Dialog as DialogPrimitive } from "radix-ui"
+import { Dialog, Dialog as DialogPrimitive } from "radix-ui"
+
 export const Route = createFileRoute('/quiz/')({
   component: RouteComponent,
 })
@@ -19,18 +20,21 @@ function RouteComponent() {
   const [currentQuestion, setCurrentQuestion] = useState(1)
   const totalQuestions = 10
   const progressValue = (currentQuestion / totalQuestions) * 100
+  const router = useRouter();
   return (
     <main>
       <DialogPrimitive.Root defaultOpen={true}>
         <DialogPrimitive.Overlay className="fixed inset-0 bg-black/90 z-40" />
-        <DialogPrimitive.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg shadow-lg z-60 flex flex-col text-center items-center *:m-2 border-2 w-[50vw]">
+        <DialogPrimitive.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg shadow-lg z-60 flex flex-col text-center items-center *:m-2 border-2">
           <DialogPrimitive.Close aria-label="Close">
-            <Button variant={'outline'} className='cursor-pointer'>
+            <Button className='cursor-pointer text-2xl p-7'>
               Starta Quizzet!
+            <Pointer />
             </Button>
           </DialogPrimitive.Close>
-          <Button variant={'default'} className='cursor-pointer'>
-            <Link to="/">Tillbaka</Link>
+          <Button variant={'default'} className='flex flex-row items-center text-xs cursor-pointer' onClick={() => router.history.back()}>
+            <ArrowLeft />
+            Tillbaka
             </Button>
         </DialogPrimitive.Content>
       </DialogPrimitive.Root>
@@ -46,7 +50,6 @@ function RouteComponent() {
             <p>Tidigare fråga</p>
           </TooltipContent>
         </Tooltip>
-
         <Tooltip>
           <TooltipTrigger asChild>
             <Button variant={'ghost'} size={'icon'}>

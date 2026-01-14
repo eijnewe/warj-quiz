@@ -10,9 +10,7 @@ const router = createRouter({
 })
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
     <ThemeProvider storageKey="vite-ui-theme">
       <RouterProvider router={router}></RouterProvider>
     </ThemeProvider>
-  </StrictMode>
 )

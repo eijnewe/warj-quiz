@@ -1,28 +1,74 @@
 import { questions } from "@/assets/data";
 import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
+import { useNavigate } from "@tanstack/react-router";
+import { Loader2 } from "lucide-react";
 
-function GetRandomQuestion() {
-    const random = Math.floor(Math.random() * questions.length);
-    return questions[random];
+function GetRandomQuestion(remainingQuestions: typeof questions) {
+    const randomIndex = Math.floor(Math.random() * remainingQuestions.length);
+    return remainingQuestions[randomIndex];
 }
-const currentQuestion = GetRandomQuestion();
 
 export function QuestionComponent() {
+    const navigate = useNavigate();
+
+    const [remainingQuestions, setRemainingQuestions] = useState(questions);
+    const [question, setQuestion] = useState(() => GetRandomQuestion(questions));
+    const [answeredQuestions, setAnsweredQuestions] = useState<string[]>([]);
+
+    useEffect(() => {
+        if (question === null) {
+            const timeout = setTimeout(() => {
+                navigate({ to: "/quiz/results" });
+            }, 2800);
+            return () => clearTimeout(timeout);
+        }
+    }, [question, navigate]);
+
+    function clickedAnswer(answerKey: string) {
+        setAnsweredQuestions(previousAnswers => [...previousAnswers, answerKey]);
+
+        setRemainingQuestions(prevRemaining => {
+            const newRemaining = prevRemaining.filter(q => q !== question);
+
+            if (newRemaining.length > 0) {
+                setQuestion(GetRandomQuestion(newRemaining));
+            }
+            else {
+                setQuestion(null);
+            }
+            return newRemaining;
+        });
+    }
+
+    const answers = question
+        ? [
+            { key: "a1", value: question.a1 },
+            { key: "a2", value: question.a2 },
+            { key: "a3", value: question.a3 },
+            { key: "a4", value: question.a4 }
+        ]
+        : [];
+
+    const randomizedAnswers = [...answers].sort(() => Math.random() - 0.5);
+
     return (
         <div className="flex flex-col justify-center items-center m-2 *:m-2">
-            <h1 className="font-bold uppercase mb-4">{currentQuestion.question}</h1>
-            <Button variant={"outline"} className="cursor-pointer">
-                <b>A:</b> {currentQuestion.A}
-            </Button>
-            <Button variant={"outline"} className="cursor-pointer">
-                <b>B:</b> {currentQuestion.B}
-            </Button>
-            <Button variant={"outline"} className="cursor-pointer">
-                <b>C:</b> {currentQuestion.C}
-            </Button>
-            <Button variant={"outline"} className="cursor-pointer">
-                <b>D:</b> {currentQuestion.D}
-            </Button>
+            <h1 className="font-bold uppercase mb-4">
+                {question?.question}
+            </h1>
+            {question ? (
+                randomizedAnswers.map((answer) => (
+                    <Button key={answer.key} variant={"outline"} className="cursor-pointer" onClick={() => clickedAnswer(answer.key)}>
+                        {answer.value}
+                    </Button>
+                ))
+            ) : (
+                <div className="flex justify-center items-center flex-col">
+                    <Loader2 className="h-7 w-7 animate-spin" />
+                    <span className="text-sm italic">Kalkylerar personlighet ...</span>
+                </div>
+            )}
         </div>
     )
 }
