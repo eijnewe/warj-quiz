@@ -1,13 +1,15 @@
 import WolfComponent from '@/components/wolf-component'
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, useSearch } from '@tanstack/react-router'
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import JSConfetti from 'js-confetti'
 import { saveResult } from '@/lib/storage'
-import { QuestionComponent } from '@/components/question-component'
 
 export const Route = createFileRoute('/quiz/results')({
-  component: RouteComponent,
+  component: RouteComponent, 
+  validateSearch: (search) => ({
+    answeredQuestions: (search.answeredQuestions as string[]) || [],
+  }),
 })
 
 type Answer = "A1" | "A2" | "A3" | "A4"
@@ -33,7 +35,10 @@ function getResult(answers: Answer[]): WolfType {
   }
 
   answers.forEach((answer) => {
-    counts[answer]++;
+    const upperAnswer = answer.toUpperCase() as Answer
+    if (counts[upperAnswer] !== undefined) {
+      counts[upperAnswer]++
+    }
   })
 
   const sorted = (Object.entries(counts) as [Answer, number][])
@@ -61,21 +66,20 @@ function getResult(answers: Answer[]): WolfType {
   throw new Error("Ingen varg kunde tilldelas...")
 }
 
-const testData: Answer[] = ["A2", "A2", "A3", "A4", "A4"]
-const data: Answer[] = QuestionComponent
 const jsConfetti = new JSConfetti();
 
 function RouteComponent() {
+  const { answeredQuestions } = useSearch({ from: '/quiz/results' })
   const [showResult, setShowResult] = useState(false)
   const [result, setResult] = useState<WolfType | null>(null)
 
   const handleShowResult = () => {
-    const wolf = getResult(testData)
+    const wolf = getResult(answeredQuestions)
     setResult(wolf)
 
     jsConfetti.addConfetti({ emojis: ['🐺'] })
     setShowResult(true)
-    saveResult({ id: wolf, date: Date.now() })
+    saveResult({ id: wolf, date: Date.now(), answers: answeredQuestions })
   }
 
   return (

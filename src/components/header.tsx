@@ -9,13 +9,15 @@ import { ModeToggle } from './mode-toggle'
 
 export function Header() {
   return (
-    <header className="bg-background text-foreground p-4 flex justify-between items-center shadow">
-      <h1 className="text-xl font-bold">Quiz App</h1>
+    <header className="bg-background text-foreground p-2 flex justify-between items-center shadow text-center">
+      <Link to={'/'}>
+        <h1 className="text-xl font-bold font-['Atma']">WARJ</h1>
+      </Link>
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
             <NavigationMenuLink asChild>
-              <Link to={'/'}>Home</Link>
+              <Link to={'/'}>Hem</Link>
             </NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem>
@@ -25,7 +27,12 @@ export function Header() {
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuLink asChild>
-              <Link to="/quiz/history">Previous Results</Link>
+              <Link to="/memory">Memory</Link>
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <NavigationMenuLink asChild>
+              <Link to="/quiz/history">Resultat</Link>
             </NavigationMenuLink>
           </NavigationMenuItem>
         </NavigationMenuList>

@@ -36,7 +36,7 @@ export const personalities: Personality[] = [
     id: "wolf5",
     name: "Stora stygga vargen", // blandning av bus + arg
     description:
-      "Du är en kraftfull person som inte räds att stå upp för dig själv och andra. Din energi och beslutsamhet gör att du ofta tar ledarrollen. Du trivs med att styra och ställa",
+      "Du är en kraftfull person som inte räds att stå upp för dig själv och andra. Din energi och beslutsamhet gör att du ofta tar ledarrollen. Du trivs med att styra och ställa.",
     img: "https://m.media-amazon.com/images/M/MV5BYmE5MjY4OGEtYmVlOS00YTU5LThkNTMtMzRlMGI4MzlmZWFiXkEyXkFqcGc@._V1_.jpg",
   },
   {
@@ -99,27 +99,39 @@ export const questions: Question[] = [
   }, 
   {
     question: "Hur ser din perfekta helg ut?",
-    a1: "Ringer en vän för att hitta på något spontant", // bus
-    a2: "Kör minst ett hårt träningspass", // arg
-    a3: "Hittar en anledning att klä upp mig", // stil
-    a4: "Sova ut och sen potentiellt sova lite till", // trött
+    a1: "Ringer en vän för att hitta på något spontant.", // bus
+    a2: "Kör minst ett hårt träningspass.", // arg
+    a3: "Hittar en anledning att klä upp mig.", // stil
+    a4: "Sova ut och sen potentiellt sova lite till.", // trött
   },
     {
     question: "Vad är viktigast för dig i vardagen?",
-    a1: "Att ha roligt", // bus
-    a2: "Att saker går rätt till", // arg
-    a3: "Att få va kreativ", // stil
-    a4: "Att det finns tid för vila och återhämtning", // trött
+    a1: "Att ha roligt.", // bus
+    a2: "Att saker går rätt till.", // arg
+    a3: "Att få va kreativ.", // stil
+    a4: "Att det finns tid för vila och återhämtning.", // trött
   },
     {
     question: "Du ska iväg någonstans. Hur förbereder du dig?",
-    a1: "Packar i sista minuten, det löser sig längs vägen", // bus
-    a2: "Blir frustrerad över att det är svårt att få tag på den digitala biljetten", // arg
-    a3: "Planerar noga och packar i god tid", // stil
-    a4: "Överväger att stanna hemma istället", // trött
+    a1: "Packar i sista minuten, det löser sig längs vägen.", // bus
+    a2: "Blir frustrerad över att det är svårt att få tag på den digitala biljetten.", // arg
+    a3: "Planerar noga och packar i god tid.", // stil
+    a4: "Överväger att stanna hemma istället.", // trött
   }
 ];
 
 export function getPersonalityById(id: string): Personality | undefined {
   return personalities.find((p) => p.id === id);
 }
+
+export const memoryIcons: string[] = [
+  "src/assets/wolf-icon (1).png",
+  "src/assets/wolf-icon (2).png",
+  "src/assets/wolf-icon (3).png",
+  "src/assets/wolf-icon (4).png",
+  "src/assets/wolf-icon (5).png",
+  "src/assets/wolf-icon (6).png",
+  "src/assets/wolf-icon (7).png",
+  "src/assets/wolf-icon (8).png",
+]
+

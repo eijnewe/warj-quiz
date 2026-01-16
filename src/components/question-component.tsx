@@ -19,11 +19,11 @@ export function QuestionComponent() {
     useEffect(() => {
         if (question === null) {
             const timeout = setTimeout(() => {
-                navigate({ to: "/quiz/results" });
+                navigate({ to: "/quiz/results", search: { answeredQuestions } });
             }, 2800);
             return () => clearTimeout(timeout);
         }
-    }, [question, navigate]);
+    }, [question, navigate, answeredQuestions]);
 
     function clickedAnswer(answerKey: string) {
         setAnsweredQuestions(previousAnswers => [...previousAnswers, answerKey]);
@@ -54,12 +54,12 @@ export function QuestionComponent() {
 
     return (
         <div className="flex flex-col justify-center items-center m-2 *:m-2">
-            <h1 className="font-bold uppercase mb-4">
+            <h1 className="font-bold uppercase mb-4 text-center">
                 {question?.question}
             </h1>
             {question ? (
                 randomizedAnswers.map((answer) => (
-                    <Button key={answer.key} variant={"outline"} className="cursor-pointer" onClick={() => clickedAnswer(answer.key)}>
+                    <Button key={answer.key} variant={"outline"} className="cursor-pointer max-w-[75vw] wrap-break-words whitespace-normal h-fit" onClick={() => clickedAnswer(answer.key)}>
                         {answer.value}
                     </Button>
                 ))

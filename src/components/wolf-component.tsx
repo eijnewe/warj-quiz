@@ -2,11 +2,11 @@ import { personalities, getPersonalityById, type Personality } from "@/assets/da
 
 export function WolfCard({ wolf }: { wolf: Personality }) {
   return (
-    <article className="bg-card text-card-foreground rounded-lg shadow-md overflow-hidden p-10 max-w-xs">
+    <article className="bg-card text-card-foreground rounded-lg shadow-md/20 overflow-hidden p-6 max-w-xs">
       <img 
         src={wolf.img} 
         alt={wolf.name} 
-        className="w-full h-50 object-cover" 
+        className="w-full h-50 object-cover drop-shadow-xl rounded-xl" 
       />
       <div className="p-4 justify-items-center">
         <h3 className="text-lg font-semibold">

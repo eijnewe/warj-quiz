@@ -1,34 +1,29 @@
 import { createFileRoute, Link, useRouter } from '@tanstack/react-router'
+import GridComponent from '@/components/grid-component'
 import { Button } from '@/components/ui/button'
 import { ArrowLeft, Pointer, RotateCcw } from 'lucide-react'
-import { Progress } from '@/components/ui/progress'
-import { useState } from 'react'
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
-import { QuestionComponent } from '@/components/question-component'
 import { Dialog as DialogPrimitive } from "radix-ui"
 
-export const Route = createFileRoute('/quiz/')({
+
+export const Route = createFileRoute('/memory/')({
   component: RouteComponent,
 })
 
 function RouteComponent() {
-  //TODO: replace mock data with real data and setcurrentquestion
-  const [currentQuestion, setCurrentQuestion] = useState(1)
-  const totalQuestions = 6
-  const progressValue = (currentQuestion / totalQuestions) * 100
   const router = useRouter();
   return (
     <main>
-      <DialogPrimitive.Root defaultOpen={true}>
+    <DialogPrimitive.Root defaultOpen={true}>
         <DialogPrimitive.Overlay className="fixed inset-0 bg-black/85 z-40" />
         <DialogPrimitive.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg shadow-lg z-60 flex flex-col text-center items-center *:m-2 border-2">
           <DialogPrimitive.Close aria-label="Close">
             <Button className='cursor-pointer text-2xl p-7'>
-              Starta Quizzet!
+              Starta Memoryspel!
               <Pointer />
             </Button>
           </DialogPrimitive.Close>
@@ -44,42 +39,26 @@ function RouteComponent() {
             <Link to="/">
               <Button variant={'ghost'}>
                 <ArrowLeft />
-                Avbryt quiz
+                Avsluta spelet
               </Button>
             </Link>
           </TooltipTrigger>
           <TooltipContent>
-            <p>Avsluta quiz</p>
+            <p>Avsluta spel</p>
           </TooltipContent>
         </Tooltip>
         <Tooltip>
           <TooltipTrigger asChild>
-            <Button variant={'ghost'} size={'icon'} onClick={() => window.location.reload()}>
+            <Button variant={'ghost'} size={'icon'} onClick={() => globalThis.location.reload()}>
               <RotateCcw />
             </Button>
           </TooltipTrigger>
           <TooltipContent>
-            <p>Starta om quiz</p>
+            <p>Starta om spel</p>
           </TooltipContent>
         </Tooltip>
       </div>
-      <h2 className="font-semibold">Fråga {currentQuestion}</h2>
-      <QuestionComponent />
-      <Progress value={progressValue} />
-      {/* <ButtonGroup>
-        <Button>
-          <ArrowLeft />
-          Back
-        </Button>
-        <Button>
-          <RotateCcw />
-          Restart Quiz
-        </Button>
-        <Button>
-          Next
-          <ArrowRight />
-        </Button>
-      </ButtonGroup> */}
+      <GridComponent/>
     </main>
   )
 }
