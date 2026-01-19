@@ -11,6 +11,7 @@ import {
 import { Dialog as DialogPrimitive } from "radix-ui"
 import { TimerComponent } from '@/components/timer-component'
 import { useStopwatch } from 'react-timer-hook'
+import { DifficultyBar } from '@/components/difficulty-component'
 
 
 export const Route = createFileRoute('/memory/')({
@@ -43,6 +44,7 @@ function RouteComponent() {
       score: 120,
       time: 85,
       date: new Date().toISOString(),
+
     }
 
     setResult(newResult)
@@ -56,7 +58,7 @@ function RouteComponent() {
     )
   }
 
-      // topplista (topp 5)
+  // topplista (topp 5)
   const topResults: {
     score: number
     time: number
@@ -64,6 +66,13 @@ function RouteComponent() {
   }[] = JSON.parse(localStorage.getItem('memoryResults') ?? '[]')
     .sort((a, b) => b.score - a.score)
     .slice(0, 5)
+
+  const formatTime = (totalSeconds: number) => {
+    const mins = Math.floor(totalSeconds / 60)
+    const secs = totalSeconds % 60
+
+    return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`
+  }
 
   return (
     <main>
@@ -83,9 +92,6 @@ function RouteComponent() {
         </DialogPrimitive.Content>
       </DialogPrimitive.Root>
       <div className="flex justify-between">
-        {/* <Button onClick={finishGame}>
-          Avsluta spel (test)
-        </Button> */}
         <Tooltip>
           <TooltipTrigger asChild>
             <Link to="/">
@@ -110,21 +116,52 @@ function RouteComponent() {
           </TooltipContent>
         </Tooltip>
       </div>
-      <div className='flex flex-col items-center'>
-        <TimerComponent  minutes={minutes} seconds={seconds} onStart={start} onPause={pause} isRunning={isRunning}/>
-        {result && (
-  <div className="mt-4 border p-3 rounded-lg text-right">
-    <p>Poäng: {result.score}</p>
-    <p>Tid: {result.time} sek</p>
-    <p>Datum: {new Date(result.date).toLocaleString()}</p>
-  </div>
-)}
+
+
+      <div className="flex flex-col *:items-center">
+        <div className='flex flex-row justify-between'>
+          <DifficultyBar />
+          <TimerComponent minutes={minutes} seconds={seconds} onStart={start} onPause={pause} isRunning={isRunning} />
+        </div>
         <GridComponent />
-        <Button className="mt-4" onClick={finishGame}>
-  Avsluta spel
-</Button>
+        <Button onClick={finishGame} className='w-fit self-'>Visa resultat</Button>
+
+       {/* Resultat */}
+        {result && (
+          <div className="mt-4 border p-3 rounded-lg text-right">
+            <p><span className="font-bold">Poäng:</span> {result.score}</p>
+            <p><span className="font-bold">Tid:</span> {formatTime(result.time)} </p>
+            <p>
+             <span className="font-bold"> Datum:</span>{' '}
+              {new Date(result.date).toLocaleString('sv-SE', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+              })}
+            </p>
+          </div>
+        )}
+
+        {/* Topplista */}
+        <h2 className="mt-6 font-bold">Topplista</h2>
+
+        {topResults.length === 0 ? (
+          <p className="text-sm">Inga resultat ännu</p>
+        ) : (
+          <ol>
+            {topResults.map((r, i) => (
+              <li key={i}>
+                {r.score} p · {r.time}s
+              </li>
+            ))}
+          </ol>
+        )}
       </div>
-      
+
     </main>
   )
 }
+
+

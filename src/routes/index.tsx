@@ -8,7 +8,7 @@ export const Route = createFileRoute('/')({
 })
 
 function RouteComponent() {
-  return <div className="flex flex-col justify-center items-center *:w-[85vw] *:rounded-2xl *:mt-3 *:p-2 text-center">
+  return <div className="flex flex-col justify-center items-center *:w-[fit] *:rounded-2xl *:mt-3 *:p-10 text-center">
       <h1 className="font-bold uppercase text-3xl">
         WARJ
       </h1>

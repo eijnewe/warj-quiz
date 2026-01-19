@@ -53,7 +53,7 @@ export function QuestionComponent({
   }, [question])
 
   return (
-    <div className="flex flex-col justify-center items-center m-2 *:m-2">
+    <div className="flex flex-col justify-center m-2 *:m-2">
       <h1 className="font-bold uppercase mb-4 text-center">
         {question?.question}
       </h1>
@@ -62,7 +62,7 @@ export function QuestionComponent({
           <Button
             key={answer.key}
             variant={'outline'}
-            className="cursor-pointer max-w-[75vw] wrap-break-words whitespace-normal h-fit"
+            className="cursor-pointer wrap-break-words whitespace-normal h-fit"
             onClick={() => handleClick(answer.key)}
           >
             {answer.value}

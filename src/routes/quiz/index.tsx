@@ -79,11 +79,13 @@ function RouteComponent() {
           </TooltipContent>
         </Tooltip>
       </div>
-      <h2 className="font-semibold">
+      <h2 className="font-semibold p-3">
         Fråga {currentQuestion} av {totalQuestions}
       </h2>
       <QuestionComponent onAnswer={handleAnswer} />
-      <Progress value={progressValue} />
+     
+      <Progress value={progressValue} className="w-[80%] mx-auto"/>
+ 
       {/* <ButtonGroup>
         <Button>
           <ArrowLeft />

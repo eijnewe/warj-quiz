@@ -35,19 +35,19 @@ function RouteComponent() {
   }
 
   return (
-    <main>
-      <div className="flex flex-col justify-center items-center m-2 *:m-2">
+    <main className='flex justify-center'>
+      <div className="flex flex-col justify-center items-center m-2 *:m-2 w-[70vw] max-w-[80vw]">
         <h1 className="font-bold uppercase mb-4 text-3xl text-center">
           Resultat-historik
         </h1>
         <Accordion.Root type="multiple" className='*:m-2 *:rounded-sm w-full'>
           <Accordion.Item value="item-1" className='bg-amber-100 cursor-pointer p-2 flex flex-col'>
-            <Accordion.Trigger className='flex justify-center cursor-pointer pb-1'>
+            <Accordion.Trigger className='flex justify-center cursor-pointer pb-2'>
               Quiz-resultat
               <ArrowDown />
             </Accordion.Trigger>
             <Accordion.Content>
-              <div className="flex flex-col items-center justify-center">
+              <div className="flex flex-col items-center justify-center p-4">
                 {history.length === 0 ? (
                   <div className='*:m-2 flex flex-col items-center'>
                     <p className='text-center'>Inga tidigare resultat</p>
@@ -79,13 +79,15 @@ function RouteComponent() {
               </div>
             </Accordion.Content>
           </Accordion.Item>
-           <Accordion.Item value="item-2" className='bg-amber-100 cursor-pointer p-2 flex flex-col'>
-            <Accordion.Trigger className='flex justify-center pb-1'>
+          <Accordion.Item value="item-2" className='bg-amber-100 cursor-pointer p-2 flex flex-col'>
+            <Accordion.Trigger className='flex justify-center pb-2 cursor-pointer'>
               Memory-resultat
               <ArrowDown />
             </Accordion.Trigger>
             <Accordion.Content>
+              <div className='p-4'>
                 Add memory results here plsss
+              </div>
             </Accordion.Content>
           </Accordion.Item>
         </Accordion.Root>
