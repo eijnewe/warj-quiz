@@ -74,7 +74,7 @@ export const personalities: Personality[] = [
   }
 ];
 
-type Question = {
+export type Question = {
   question: string;
   a1: string;
   a2: string;
@@ -96,7 +96,7 @@ export const questions: Question[] = [
     a2: "Säger åt kompisen att göra slut. Allt det där låter för krångligt.", // arg
     a3: "Ger dem en kopp té och lyssnar på deras hela livshistoria.", // stil
     a4: '"Fråga någon annan, jag vet väl inte."', // tröttis
-  }, 
+  },
   {
     question: "Hur ser din perfekta helg ut?",
     a1: "Ringer en vän för att hitta på något spontant.", // bus
@@ -134,4 +134,3 @@ export const memoryIcons: string[] = [
   "src/assets/wolf-icon (7).png",
   "src/assets/wolf-icon (8).png",
 ]
-
