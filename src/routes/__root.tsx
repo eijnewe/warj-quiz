@@ -8,11 +8,13 @@ export const Route = createRootRoute({
 })
 
 function RootComponent() {
+  const [scores, setScores] = React.useState([])
+
+
   return (
     <React.Fragment>
       <Header/>
-      <div>Hello "__root"!</div>
-      <Outlet />
+      <Outlet context={{ scores, setScores }} /> 
       <TanStackRouterDevtools></TanStackRouterDevtools>
     </React.Fragment>
   )

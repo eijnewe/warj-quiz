@@ -1,4 +1,5 @@
 import { useState } from "react"
+import type { MemoryIcons } from "@/assets/data";
 
 export interface MemoryCardProps {
     icon: string
@@ -20,6 +21,33 @@ export const MemoryCard = ({ icon }: MemoryCardProps) => {
             </span>
         )
     }
+        </div>
+    )
+}
+export interface CardProps {
+    item: MemoryIcons
+    handleSelectedCards: (item: MemoryIcons) => void
+    toggled: boolean
+    stopFlip: boolean
+}
+
+export function Card({ 
+    item, 
+    handleSelectedCards, 
+    toggled, 
+    stopFlip,
+ }: CardProps) {
+    return (
+        <div className="item">
+            <div className={toggled ? "toggled" : ""}>
+                <img className="front" src={item.img} alt="front"/>
+                <div 
+                className="back" 
+                onClick={() => !stopFlip && handleSelectedCards(item)}
+                >
+                    {" "}
+                </div>
+            </div>
         </div>
     )
 }

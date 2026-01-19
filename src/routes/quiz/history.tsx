@@ -42,7 +42,7 @@ function RouteComponent() {
         </h1>
         <Accordion.Root type="multiple" className='*:m-2 *:rounded-sm w-full'>
           <Accordion.Item value="item-1" className='bg-amber-100 cursor-pointer p-2 flex flex-col'>
-            <Accordion.Trigger className='flex justify-center'>
+            <Accordion.Trigger className='flex justify-center cursor-pointer pb-1'>
               Quiz-resultat
               <ArrowDown />
             </Accordion.Trigger>
@@ -57,7 +57,7 @@ function RouteComponent() {
                   </div>
                 ) : (
                   <>
-                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl'>
+                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl justify-evenly'>
                       {history.map((result, index) => (
                         <div key={index} className='flex flex-col items-center gap-2'>
                           <WolfComponent id={result.id} />
@@ -80,7 +80,7 @@ function RouteComponent() {
             </Accordion.Content>
           </Accordion.Item>
            <Accordion.Item value="item-2" className='bg-amber-100 cursor-pointer p-2 flex flex-col'>
-            <Accordion.Trigger className='flex justify-center'>
+            <Accordion.Trigger className='flex justify-center pb-1'>
               Memory-resultat
               <ArrowDown />
             </Accordion.Trigger>
