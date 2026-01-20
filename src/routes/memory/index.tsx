@@ -86,8 +86,8 @@ function RouteComponent() {
               <Pointer />
             </Button>
           </DialogPrimitive.Close>
-          <div className='flex *:m-1'>
-            <Button variant={'default'} className='flex flex-row items-center text-xs cursor-pointer' onClick={() => router.history.back()}>
+          <div className='flex flex-row items-start'>
+            <Button variant={'default'} className=' m-1 h-8 p-0.5 text-xs cursor-pointer' onClick={() => router.history.back()}>
               <ArrowLeft />
               Tillbaka
             </Button>

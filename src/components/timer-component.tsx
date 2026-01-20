@@ -17,11 +17,11 @@ export function TimerComponent({
     return (
         <div className='flex flex-col items-center w-fit'>
             <div className='*:m-1 *:w-8 *:h-8 *:p-0.5 *:border-2 *:drop-shadow-sm/30 *:rounded-lg *:border-black'>
-                <Button onClick={onStart} className={`${isRunning ? 'bg-amber-300 text-black' : ''} cursor-pointer`}
+                <Button onClick={onStart} className={`${isRunning ? 'bg-amber-300 text-black hover:text-white' : ''} cursor-pointer`}
                 >
                     <Play />
                 </Button>
-                <Button onClick={onPause} className={`${isRunning ? '' : 'bg-amber-300 text-black'} cursor-pointer`}>
+                <Button onClick={onPause} className={`${isRunning ? '' : 'bg-amber-300 text-black hover:text-white'} cursor-pointer`}>
                     <Pause />
                 </Button>
             </div>
