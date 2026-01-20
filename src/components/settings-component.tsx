@@ -27,7 +27,7 @@ export function SettingsDialog({
     return (
         <DialogPrimitive.Root>
             <DialogPrimitive.Trigger>
-                <Button className="cursor-pointer" onClick={onPause}>
+                <Button className="cursor-pointer m-1 w-8 h-8 p-0.5 drop-shadow-sm/30 rounded-lg" onClick={onPause}>
                     <Settings />
                 </Button>
             </DialogPrimitive.Trigger>

@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import { createFileRoute, Link, useRouter } from '@tanstack/react-router'
+import { createFileRoute, useRouter } from '@tanstack/react-router'
 import { GridComponent } from '@/components/grid-component'
 import { Button } from '@/components/ui/button'
-import { ArrowLeft, Pointer, RotateCcw, Settings } from 'lucide-react'
+import { ArrowLeft, Pointer, RotateCcw } from 'lucide-react'
 import {
   Tooltip,
   TooltipContent,
@@ -13,6 +13,7 @@ import { TimerComponent } from '@/components/timer-component'
 import { useStopwatch } from 'react-timer-hook'
 import { SettingsDialog } from '@/components/settings-component'
 import { ConfirmationPopup } from '@/components/confirmation-popup'
+import { DifficultyBar } from '@/components/difficulty-bar'
 
 export const Route = createFileRoute('/memory/')({
   component: RouteComponent,
@@ -132,10 +133,10 @@ function RouteComponent() {
         </Tooltip>
       </div>
 
-
-      <div className="flex flex-col *:items-center">
+      <div className="flex flex-col *:items-start">
         <div className='flex flex-row justify-between'>
           <SettingsDialog onStart={start} onPause={pause} />
+          <DifficultyBar/>
           <TimerComponent minutes={minutes} seconds={seconds} onStart={start} onPause={pause} isRunning={isRunning} />
         </div>
         <GridComponent />

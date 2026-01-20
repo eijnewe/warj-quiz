@@ -1,3 +1,4 @@
+import { DifficultyBar } from '@/components/difficulty-bar'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/quiz/test')({
@@ -5,5 +6,7 @@ export const Route = createFileRoute('/quiz/test')({
 })
 
 function RouteComponent() {
-  return <div>Hello "/quiz/test"!</div>
+  return <>Hello "/quiz/test"!
+  <DifficultyBar/>
+    </>
 }
