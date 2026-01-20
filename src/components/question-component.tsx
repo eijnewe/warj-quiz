@@ -6,6 +6,7 @@ import { Loader2 } from 'lucide-react'
 
 type Props = {
   onAnswer: (answerKey: string) => void
+  answeredQuestions: string[]
 }
 
 function getRandomQuestion(remainingQuestions: typeof questions) {
@@ -13,19 +14,17 @@ function getRandomQuestion(remainingQuestions: typeof questions) {
   return remainingQuestions[randomIndex]
 }
 
-export function QuestionComponent({
-  onAnswer
-}: Props) {
+export function QuestionComponent({ onAnswer, answeredQuestions }: Props) {
   const navigate = useNavigate()
 
   const [remainingQuestions, setRemainingQuestions] = useState(questions)
   const [question, setQuestion] = useState<Question | null>(() =>
-  getRandomQuestion(questions)
-)
+    getRandomQuestion(questions),
+  )
   useEffect(() => {
     if (!question) {
       const timeout = setTimeout(() => {
-        navigate({ to: '/quiz/results' })
+        navigate({ to: '/quiz/results', search: { answeredQuestions } })
       }, 2800)
       return () => clearTimeout(timeout)
     }
