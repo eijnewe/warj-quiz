@@ -105,14 +105,14 @@ function RouteComponent() {
             </Link> */}
             <DialogPrimitive.Root>
               <DialogPrimitive.Trigger>
-                <Button className="cursor-pointer" variant={'ghost'}>
+                <Button className="cursor-pointer" variant={'ghost'}onClick={pause}>
                   <ArrowLeft/>
                   Avsluta spelet
                 </Button>
               </DialogPrimitive.Trigger>
               <DialogPrimitive.Overlay className="fixed inset-0 bg-black/40 z-40" />
               <DialogPrimitive.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg shadow-lg z-60 flex flex-col text-center items-center border-2">
-                <ConfirmationPopup linkTo='/'/>
+                <ConfirmationPopup linkTo='/' isExitNext onStart={start} />
               </DialogPrimitive.Content>
             </DialogPrimitive.Root>
           </TooltipTrigger>

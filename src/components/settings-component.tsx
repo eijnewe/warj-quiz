@@ -22,7 +22,7 @@ export function SettingsDialog({
 }: {
     onStart: () => void;
     onPause: () => void;
-    isMainMenu: boolean
+    isMainMenu?: boolean
 }) {
     return (
         <DialogPrimitive.Root>
