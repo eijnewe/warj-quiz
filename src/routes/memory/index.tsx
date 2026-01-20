@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { createFileRoute, Link, useRouter } from '@tanstack/react-router'
 import { GridComponent } from '@/components/grid-component'
 import { Button } from '@/components/ui/button'
-import { ArrowLeft, Pointer, RotateCcw } from 'lucide-react'
+import { ArrowLeft, Pointer, RotateCcw, Settings } from 'lucide-react'
 import {
   Tooltip,
   TooltipContent,
@@ -11,8 +11,8 @@ import {
 import { Dialog as DialogPrimitive } from "radix-ui"
 import { TimerComponent } from '@/components/timer-component'
 import { useStopwatch } from 'react-timer-hook'
-import { DifficultyBar } from '@/components/difficulty-component'
-
+import { SettingsDialog } from '@/components/settings-component'
+import { ConfirmationPopup } from '@/components/confirmation-popup'
 
 export const Route = createFileRoute('/memory/')({
   component: RouteComponent,
@@ -85,21 +85,36 @@ function RouteComponent() {
               <Pointer />
             </Button>
           </DialogPrimitive.Close>
-          <Button variant={'default'} className='flex flex-row items-center text-xs cursor-pointer' onClick={() => router.history.back()}>
-            <ArrowLeft />
-            Tillbaka
-          </Button>
+          <div className='flex *:m-1'>
+            <Button variant={'default'} className='flex flex-row items-center text-xs cursor-pointer' onClick={() => router.history.back()}>
+              <ArrowLeft />
+              Tillbaka
+            </Button>
+            <SettingsDialog onStart={start} onPause={pause} isMainMenu/>
+          </div>
         </DialogPrimitive.Content>
       </DialogPrimitive.Root>
       <div className="flex justify-between">
         <Tooltip>
           <TooltipTrigger asChild>
-            <Link to="/">
+            {/* <Link to="/">
               <Button variant={'ghost'}>
                 <ArrowLeft />
                 Avsluta spelet
               </Button>
-            </Link>
+            </Link> */}
+            <DialogPrimitive.Root>
+              <DialogPrimitive.Trigger>
+                <Button className="cursor-pointer" variant={'ghost'}>
+                  <ArrowLeft/>
+                  Avsluta spelet
+                </Button>
+              </DialogPrimitive.Trigger>
+              <DialogPrimitive.Overlay className="fixed inset-0 bg-black/40 z-40" />
+              <DialogPrimitive.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg shadow-lg z-60 flex flex-col text-center items-center border-2">
+                <ConfirmationPopup linkTo='/'/>
+              </DialogPrimitive.Content>
+            </DialogPrimitive.Root>
           </TooltipTrigger>
           <TooltipContent>
             <p>Avsluta spel</p>
@@ -120,19 +135,19 @@ function RouteComponent() {
 
       <div className="flex flex-col *:items-center">
         <div className='flex flex-row justify-between'>
-          <DifficultyBar />
+          <SettingsDialog onStart={start} onPause={pause} />
           <TimerComponent minutes={minutes} seconds={seconds} onStart={start} onPause={pause} isRunning={isRunning} />
         </div>
         <GridComponent />
         <Button onClick={finishGame} className='w-fit self-'>Visa resultat</Button>
 
-       {/* Resultat */}
+        {/* Resultat */}
         {result && (
           <div className="mt-4 border p-3 rounded-lg text-right">
             <p><span className="font-bold">Poäng:</span> {result.score}</p>
             <p><span className="font-bold">Tid:</span> {formatTime(result.time)} </p>
             <p>
-             <span className="font-bold"> Datum:</span>{' '}
+              <span className="font-bold"> Datum:</span>{' '}
               {new Date(result.date).toLocaleString('sv-SE', {
                 year: 'numeric',
                 month: '2-digit',
