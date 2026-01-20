@@ -6,7 +6,6 @@ import { Loader2 } from 'lucide-react'
 
 type Props = {
   onAnswer: (answerKey: string) => void
-  answeredQuestions: string[]
 }
 
 function getRandomQuestion(remainingQuestions: typeof questions) {
@@ -14,14 +13,14 @@ function getRandomQuestion(remainingQuestions: typeof questions) {
   return remainingQuestions[randomIndex]
 }
 
-export function QuestionComponent({ onAnswer, answeredQuestions }: Props) {
+export function QuestionComponent({ onAnswer }: Props) {
   const navigate = useNavigate()
 
   const [remainingQuestions, setRemainingQuestions] = useState(questions)
   const [question, setQuestion] = useState<Question | null>(() =>
     getRandomQuestion(questions),
   )
-  useEffect(() => {
+  /*  useEffect(() => {
     if (!question) {
       const timeout = setTimeout(() => {
         navigate({ to: '/quiz/results', search: { answeredQuestions } })
@@ -29,7 +28,7 @@ export function QuestionComponent({ onAnswer, answeredQuestions }: Props) {
       return () => clearTimeout(timeout)
     }
   }, [question, navigate])
-
+ */
   function handleClick(answerKey: string) {
     onAnswer(answerKey)
 
@@ -51,12 +50,14 @@ export function QuestionComponent({ onAnswer, answeredQuestions }: Props) {
     ].sort(() => Math.random() - 0.5)
   }, [question])
 
+  if (!question) return null
+
   return (
     <div className="flex flex-col justify-center m-2 *:m-2">
       <h1 className="font-bold uppercase mb-4 text-center">
-        {question?.question}
+        {question.question}
       </h1>
-      {question ?
+      {
         answers.map((answer) => (
           <Button
             key={answer.key}
@@ -67,10 +68,10 @@ export function QuestionComponent({ onAnswer, answeredQuestions }: Props) {
             {answer.value}
           </Button>
         ))
-      : <div className="flex justify-center items-center flex-col">
+        /*  <div className="flex justify-center items-center flex-col">
           <Loader2 className="h-7 w-7 animate-spin" />
           <span className="text-sm italic">Kalkylerar personlighet ...</span>
-        </div>
+        </div> */
       }
     </div>
   )
