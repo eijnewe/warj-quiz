@@ -13,13 +13,13 @@ import { QuestionComponent } from '@/components/question-component'
 import { Dialog as DialogPrimitive } from 'radix-ui'
 import { getResult } from '@/lib/quiz-utils'
 
-export const Route = createFileRoute('/quiz/')({
+export const Route = createFileRoute("/quiz/")({
   component: RouteComponent,
-})
+});
 
 function RouteComponent() {
-  const totalQuestions = questions.length
-  const [answeredQuestions, setAnsweredQuestions] = useState<string[]>([])
+  const totalQuestions = questions.length;
+  const [answeredQuestions, setAnsweredQuestions] = useState<string[]>([]);
 
   const answeredCount = answeredQuestions.length
   const currentQuestion = Math.min(answeredCount + 1, totalQuestions)
@@ -27,8 +27,10 @@ function RouteComponent() {
   const isComplete = answeredCount === totalQuestions
 
   function handleAnswer(answerKey: string) {
-    setAnsweredQuestions((prev) => [...prev, answerKey])
+    setAnsweredQuestions((prev) => [...prev, answerKey]);
   }
+
+  const wolfId = isComplete ? getResult(answeredQuestions) : ''
 
   const wolfId = isComplete ? getResult(answeredQuestions) : ''
 
@@ -37,18 +39,14 @@ function RouteComponent() {
     <main>
       <DialogPrimitive.Root defaultOpen={true}>
         <DialogPrimitive.Overlay className="fixed inset-0 bg-black/85 z-40" />
-        <DialogPrimitive.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg shadow-lg z-60 flex flex-col text-center items-center *:m-2 border-2">
+        <DialogPrimitive.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-card/90 text-card-foreground border border-border p-6 rounded-lg shadow-lg z-60 flex flex-col text-center items-center *:m-2 border-2">
           <DialogPrimitive.Close aria-label="Close" asChild>
             <Button className="cursor-pointer text-2xl p-7">
               Starta Quizzet!
               <Pointer />
             </Button>
           </DialogPrimitive.Close>
-          <Button
-            variant={'default'}
-            className="flex flex-row items-center text-xs cursor-pointer"
-            onClick={() => router.history.back()}
-          >
+          <Button variant={"default"} className="flex flex-row items-center text-xs cursor-pointer" onClick={() => router.history.back()}>
             <ArrowLeft />
             Tillbaka
           </Button>
@@ -58,7 +56,7 @@ function RouteComponent() {
         <Tooltip>
           <TooltipTrigger asChild>
             <Link to="/">
-              <Button variant={'ghost'}>
+              <Button variant={"ghost"}>
                 <ArrowLeft />
                 Avbryt quiz
               </Button>
@@ -70,11 +68,7 @@ function RouteComponent() {
         </Tooltip>
         <Tooltip>
           <TooltipTrigger asChild>
-            <Button
-              variant={'ghost'}
-              size={'icon'}
-              onClick={() => window.location.reload()}
-            >
+            <Button variant={"ghost"} size={"icon"} onClick={() => window.location.reload()}>
               <RotateCcw />
             </Button>
           </TooltipTrigger>
@@ -116,5 +110,5 @@ function RouteComponent() {
         </Button>
       </ButtonGroup> */}
     </main>
-  )
+  );
 }

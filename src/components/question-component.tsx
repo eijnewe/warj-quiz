@@ -1,16 +1,16 @@
-import { questions, type Question } from '@/assets/data'
-import { Button } from '@/components/ui/button'
-import { useEffect, useMemo, useState } from 'react'
-import { useNavigate } from '@tanstack/react-router'
-import { Loader2 } from 'lucide-react'
+import { questions, type Question } from "@/assets/data";
+import { Button } from "@/components/ui/button";
+import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "@tanstack/react-router";
+import { Loader2 } from "lucide-react";
 
 type Props = {
-  onAnswer: (answerKey: string) => void
-}
+  onAnswer: (answerKey: string) => void;
+};
 
 function getRandomQuestion(remainingQuestions: typeof questions) {
-  const randomIndex = Math.floor(Math.random() * remainingQuestions.length)
-  return remainingQuestions[randomIndex]
+  const randomIndex = Math.floor(Math.random() * remainingQuestions.length);
+  return remainingQuestions[randomIndex];
 }
 
 export function QuestionComponent({ onAnswer }: Props) {
@@ -30,17 +30,17 @@ export function QuestionComponent({ onAnswer }: Props) {
   }, [question, navigate])
  */
   function handleClick(answerKey: string) {
-    onAnswer(answerKey)
+    onAnswer(answerKey);
 
     setRemainingQuestions((prev) => {
-      const updated = prev.filter((q) => q !== question)
+      const updated = prev.filter((q) => q !== question);
 
-      setQuestion(updated.length ? getRandomQuestion(updated) : null)
-      return updated
-    })
+      setQuestion(updated.length ? getRandomQuestion(updated) : null);
+      return updated;
+    });
   }
   const answers = useMemo(() => {
-    if (!question) return []
+    if (!question) return [];
 
     return [
       { key: 'a1', value: question.a1 },
@@ -54,17 +54,10 @@ export function QuestionComponent({ onAnswer }: Props) {
 
   return (
     <div className="flex flex-col justify-center m-2 *:m-2">
-      <h1 className="font-bold uppercase mb-4 text-center">
-        {question.question}
-      </h1>
-      {
+      <h1 className="font-bold uppercase mb-4 text-center">{question.question}</h1>
+      { (
         answers.map((answer) => (
-          <Button
-            key={answer.key}
-            variant={'outline'}
-            className="cursor-pointer wrap-break-words whitespace-normal h-fit"
-            onClick={() => handleClick(answer.key)}
-          >
+          <Button key={answer.key} variant={"quiz"} className="cursor-pointer wrap-break-words whitespace-normal h-fit" onClick={() => handleClick(answer.key)}>
             {answer.value}
           </Button>
         ))
@@ -74,5 +67,5 @@ export function QuestionComponent({ onAnswer }: Props) {
         </div> */
       }
     </div>
-  )
+  );
 }
