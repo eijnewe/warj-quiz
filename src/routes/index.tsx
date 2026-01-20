@@ -32,7 +32,7 @@ function RouteComponent() {
       <div className="flex flex-col justify-center items-center bg-accent text-accent-foreground">
         <h2 className="text-2xl italic font-bold pb-2">Spela Varg-memory!</h2>
         <p className="pb-2">Finslipa ditt minne!</p>
-        <img src="/src/assets/question-icon.png" alt="question-mark" width={80} className="p-3" />
+        <img src="/src/assets/question-icon.png" alt="question-mark" width={80} className="p-3 transition hover:scale-115" />
         <Link to="/memory">
           <Button variant={"outline"} className="uppercase cursor-pointer mt-3">
             Spela nu!
