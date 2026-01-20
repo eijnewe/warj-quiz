@@ -34,7 +34,7 @@ function RouteComponent() {
         <p className='pb-2'>
           Finslipa ditt minne!
         </p>
-        <img src='/src/assets/question-icon.png' alt='question-mark' width={80} className='p-3'/>
+        <img src='/src/assets/question-icon.png' alt='question-mark' width={80} className='p-3 transition hover:scale-115'/>
         <Link to="/memory">
           <Button variant={"outline"} className='uppercase cursor-pointer'>
             Spela nu!
