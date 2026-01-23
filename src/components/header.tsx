@@ -25,6 +25,11 @@ export function Header() {
               <Link to="/memory">Memory</Link>
             </NavigationMenuLink>
           </NavigationMenuItem>
+           <NavigationMenuItem>
+            <NavigationMenuLink asChild>
+              <Link to="/dnd">Matcha Varg</Link>
+            </NavigationMenuLink>
+          </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuLink asChild>
               <Link to="/quiz/history">Resultat</Link>
