@@ -65,7 +65,7 @@ export function QuestionComponent({ onAnswer }: Props) {
           <Loader2 className="h-7 w-7 animate-spin" />
           <span className="text-sm italic">Kalkylerar personlighet ...</span>
         </div> */
-      }
+      )}
     </div>
   );
 }

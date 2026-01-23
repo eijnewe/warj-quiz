@@ -32,8 +32,6 @@ function RouteComponent() {
 
   const wolfId = isComplete ? getResult(answeredQuestions) : ''
 
-  const wolfId = isComplete ? getResult(answeredQuestions) : ''
-
   const router = useRouter()
   return (
     <main>

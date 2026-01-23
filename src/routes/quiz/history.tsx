@@ -4,7 +4,7 @@ import { getHistory, clearHistory } from "@/lib/storage";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "@tanstack/react-router";
-import { SavedResult } from "@/lib/storage";
+import type { SavedResult } from "@/lib/storage";
 import { Accordion } from "radix-ui";
 import { ArrowDown } from "lucide-react";
 
