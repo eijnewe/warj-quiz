@@ -188,3 +188,57 @@ export const MemoryIcons1: MemoryIconsProps[] = [
   },
 ]
 
+export interface MatchItem {
+  id: string;
+  src: string
+}
+
+export const MatchArray: MatchItem[] = [
+  {
+    id: "1-a",
+    src: "src/assets/wolf-pairs/pair-1-a.png",
+  },
+  { id: "1-b",
+    src: "src/assets/wolf-pairs/pair-1-b.png"
+  },
+  {
+    id: "2-a",
+    src: "src/assets/wolf-pairs/pair-2-a.png"
+  },
+  {
+    id: "2-b",
+    src: "src/assets/wolf-pairs/pair-2-b.png"
+  },
+  {
+    id: "3-a",
+    src: "src/assets/wolf-pairs/pair-3-a.png"
+  },
+  {
+    id: "3-b",
+    src: "src/assets/wolf-pairs/pair-3-b.png"
+  },
+  {
+    id: "4-a",
+    src: "src/assets/wolf-pairs/pair-4-a.png"
+  },
+  {
+    id: "4-b",
+    src: "src/assets/wolf-pairs/pair-4-b.png"
+  },
+  {
+    id: "5-a",
+    src: "src/assets/wolf-pairs/pair-5-a.png"
+  },
+  {
+    id: "5-b",
+    src: "src/assets/wolf-pairs/pair-5-b.png"
+  },
+  {
+    id: "6-a",
+    src: "src/assets/wolf-pairs/pair-6-a.png"
+  },
+  {
+    id: "6-b",
+    src: "src/assets/wolf-pairs/pair-6-b.png"
+  }
+]

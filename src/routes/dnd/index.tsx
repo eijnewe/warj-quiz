@@ -11,9 +11,8 @@ import {
 import { Dialog as DialogPrimitive } from "radix-ui"
 import { Button } from '@/components/ui/button'
 import { ArrowLeft, RotateCcw, Settings } from 'lucide-react'
-import { DndContext } from '@dnd-kit/core';
-import { useState } from 'react';
-import { Draggable, Droppable } from '@/components/dnd-grid-component';
+import { DndGrid } from '@/components/dnd-grid-component';
+
 
 export const Route = createFileRoute('/dnd/')({
     component: RouteComponent,
@@ -23,15 +22,7 @@ export const Route = createFileRoute('/dnd/')({
 
 function RouteComponent() {
     const { seconds, minutes, pause, start, isRunning } = useStopwatch({ autoStart: false });
-    const [parent, setParent] = useState(null);
-    const draggable = (
-        <Draggable id="draggable">
-            Go ahead, drag me.
-        </Draggable>
-    );
-    function handleDragEnd({ over }) {
-        setParent(over ? over.id : null);
-    }
+
     return <div>
         <div className="flex justify-between">
             <DialogPrimitive.Root>
@@ -87,11 +78,6 @@ function RouteComponent() {
             <PointBar />
             <TimerComponent minutes={minutes} seconds={seconds} onStart={start} onPause={pause} isRunning={isRunning} />
         </div>
-        <DndContext onDragEnd={handleDragEnd}>
-            {!parent ? draggable : null}
-            <Droppable id="droppable">
-                {parent === "droppable" ? draggable : 'Drop here'}
-            </Droppable>
-        </DndContext>
+        <DndGrid />
     </div>
 }
