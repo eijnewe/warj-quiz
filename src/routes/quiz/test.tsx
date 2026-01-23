@@ -1,13 +1,13 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { DifficultyBar } from '@/components/difficulty-bar'
+import { PointBar } from '@/components/point-counter-component'
+import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute("/quiz/test")({
   component: RouteComponent,
 });
 
 function RouteComponent() {
-  return (
-    <>
-      <div>Hello "/quiz/test"!</div>
+  return <>Hello "/quiz/test"!
+  <PointBar />
     </>
-  );
 }
