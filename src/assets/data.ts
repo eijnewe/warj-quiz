@@ -138,4 +138,111 @@ export const memoryIcons: string[] = [
   "src/assets/wolf-icon (7).png",
   "src/assets/wolf-icon (8).png",
   "src/assets/wolf-icon (9).png",
-];
+]
+
+export type MemoryIconsProps = {
+  id: number
+  name: string
+  img: string
+  matched: boolean
+}
+
+export const MemoryIcons1: MemoryIconsProps[] = [
+  {
+    id: 1,
+    name: "1" ,
+    img: "src/assets/wolf-icon (1).png",
+    matched: false,
+  },
+  {
+    id: 2,
+    name: "2" ,
+    img: "src/assets/wolf-icon (2).png",
+    matched: false,
+  },{
+    id: 3,
+    name: "3" ,
+    img: "src/assets/wolf-icon (3).png",
+    matched: false,
+  },{
+    id: 4,
+    name: "4" ,
+    img: "src/assets/wolf-icon (4).png",
+    matched: false,
+  },{
+    id: 5,
+    name: "5" ,
+    img: "src/assets/wolf-icon (5).png",
+    matched: false,
+  },{
+    id: 6,
+    name: "6" ,
+    img: "src/assets/wolf-icon (6).png",
+    matched: false,
+  },{
+    id: 7,
+    name: "7" ,
+    img: "src/assets/wolf-icon (7).png",
+    matched: false,
+  },{
+    id: 8,
+    name: "7" ,
+    img: "src/assets/wolf-icon (8).png",
+    matched: false,
+  },
+]
+
+export interface MatchItem {
+  id: string;
+  src: string
+}
+
+export const MatchArray: MatchItem[] = [
+  {
+    id: "1-a",
+    src: "src/assets/wolf-pairs/pair-1-a.png",
+  },
+  { id: "1-b",
+    src: "src/assets/wolf-pairs/pair-1-b.png"
+  },
+  {
+    id: "2-a",
+    src: "src/assets/wolf-pairs/pair-2-a.png"
+  },
+  {
+    id: "2-b",
+    src: "src/assets/wolf-pairs/pair-2-b.png"
+  },
+  {
+    id: "3-a",
+    src: "src/assets/wolf-pairs/pair-3-a.png"
+  },
+  {
+    id: "3-b",
+    src: "src/assets/wolf-pairs/pair-3-b.png"
+  },
+  {
+    id: "4-a",
+    src: "src/assets/wolf-pairs/pair-4-a.png"
+  },
+  {
+    id: "4-b",
+    src: "src/assets/wolf-pairs/pair-4-b.png"
+  },
+  {
+    id: "5-a",
+    src: "src/assets/wolf-pairs/pair-5-a.png"
+  },
+  {
+    id: "5-b",
+    src: "src/assets/wolf-pairs/pair-5-b.png"
+  },
+  {
+    id: "6-a",
+    src: "src/assets/wolf-pairs/pair-6-a.png"
+  },
+  {
+    id: "6-b",
+    src: "src/assets/wolf-pairs/pair-6-b.png"
+  }
+]

@@ -12,17 +12,17 @@ export function Header() {
         <NavigationMenuList>
           <NavigationMenuItem>
             <NavigationMenuLink asChild>
-              <Link to={"/"}>Hem</Link>
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuLink asChild>
               <Link to="/quiz">Quiz</Link>
             </NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuLink asChild>
               <Link to="/memory">Memory</Link>
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+           <NavigationMenuItem>
+            <NavigationMenuLink asChild>
+              <Link to="/dnd">Matcha Varg</Link>
             </NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem>
