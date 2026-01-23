@@ -9,13 +9,15 @@ export function ConfirmationPopup({
     chosenPlayers,
     linkTo,
     onStart,
-    isExitNext,
+    leaveGameMem,
+    restartGameMem
 }: {
     chosenDiff?: string;
     chosenPlayers?: string; 
     linkTo?: string;
     onStart?: () => void;
-    isExitNext?: boolean;
+    leaveGameMem?: boolean;
+    restartGameMem?: boolean;
 }) {
 
     return (
@@ -24,19 +26,19 @@ export function ConfirmationPopup({
             {chosenDiff || chosenPlayers
                 ? chosenPlayers
                     ? <> starta ett nytt spel med <span className="lowercase font-bold">{chosenPlayers}</span>?</>
-                    : <> starta ett nytt spel på <span className="lowercase font-bold">{chosenDiff}</span> svårighetsnivå?</>
+                    : <> starta ett nytt spel på <span className="lowercase font-bold">{chosenDiff}</span> svårighetsgrad?</>
                 : 
                     <> lämna spelet?</>
             }
             </h1>
             <div className="flex *:m-1 mt-2">
                 <Link to={linkTo}>
-                    <Button className="cursor-pointer">
+                    <Button className="cursor-pointer" onClick={restartGameMem ? () => globalThis.location.reload() : undefined}>
                         Ja
                     </Button>
                 </Link>
                 <DialogPrimitive.Close aria-label="Close" className="self-end">
-                    <Button className="cursor-pointer" onClick={isExitNext ? onStart : undefined}>
+                    <Button className="cursor-pointer" onClick={leaveGameMem ? onStart : undefined}>
                         Avbryt
                     </Button>
                 </DialogPrimitive.Close>
