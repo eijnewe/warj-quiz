@@ -2,7 +2,11 @@ import { Dialog as DialogPrimitive } from "radix-ui";
 import { Button } from "./ui/button";
 import { X, Settings } from "lucide-react";
 import { ConfirmationPopup } from "./confirmation-popup";
-
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
 
 const difficultyArray: string[] = [
     "Lätt",
@@ -26,11 +30,18 @@ export function SettingsDialog({
 }) {
     return (
         <DialogPrimitive.Root>
+            <Tooltip>
+            <TooltipTrigger asChild>
             <DialogPrimitive.Trigger>
-                <Button className="cursor-pointer m-1 w-8 h-8 p-0.5 drop-shadow-sm/30 rounded-lg" onClick={onPause}>
+                <Button className="cursor-pointer m-1 w-8 h-8 p-0.5  hover:bg-amber-300 hover:text-black border-2 drop-shadow-sm/30 rounded-lg border-black" onClick={onPause}>
                     <Settings />
                 </Button>
             </DialogPrimitive.Trigger>
+            </TooltipTrigger>
+            <TooltipContent>
+                Inställningar
+            </TooltipContent>
+            </Tooltip>
             <DialogPrimitive.Overlay className="fixed inset-0 bg-black/40 z-40" />
             <DialogPrimitive.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg shadow-lg z-60 flex flex-col text-center items-center border-2 w-[40vw]">
                 <DialogPrimitive.Close aria-label="Close" className="self-end">
