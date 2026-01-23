@@ -14,6 +14,7 @@ import { useStopwatch } from 'react-timer-hook'
 import { SettingsDialog } from '@/components/settings-component'
 import { ConfirmationPopup } from '@/components/confirmation-popup'
 import { DifficultyBar } from '@/components/difficulty-bar'
+import { PointBar } from '@/components/point-counter-component'
 
 export const Route = createFileRoute("/memory/")({
   component: RouteComponent,
@@ -79,52 +80,55 @@ function RouteComponent() {
               <ArrowLeft />
               Tillbaka
             </Button>
-            <SettingsDialog onStart={start} onPause={pause} isMainMenu/>
+            <SettingsDialog onStart={start} onPause={pause} isMainMenu />
           </div>
         </DialogPrimitive.Content>
       </DialogPrimitive.Root>
       <div className="flex justify-between">
-        <Tooltip>
-          <TooltipTrigger asChild>
-            {/* <Link to="/">
-              <Button variant={'ghost'}>
-                <ArrowLeft />
-                Avsluta spelet
-              </Button>
-            </Link> */}
-            <DialogPrimitive.Root>
+        <DialogPrimitive.Root>
+          <Tooltip>
+            <TooltipTrigger asChild>
               <DialogPrimitive.Trigger>
-                <Button className="cursor-pointer" variant={'ghost'}onClick={pause}>
-                  <ArrowLeft/>
-                  Avsluta spelet
+                <Button className="cursor-pointer" variant={'ghost'} onClick={pause}>
+                  <ArrowLeft />
                 </Button>
               </DialogPrimitive.Trigger>
-              <DialogPrimitive.Overlay className="fixed inset-0 bg-black/40 z-40" />
-              <DialogPrimitive.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg shadow-lg z-60 flex flex-col text-center items-center border-2">
-                <ConfirmationPopup linkTo='/' isExitNext onStart={start} />
-              </DialogPrimitive.Content>
-            </DialogPrimitive.Root>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>Avsluta spel</p>
-          </TooltipContent>
-        </Tooltip>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button variant={"ghost"} size={"icon"} onClick={() => globalThis.location.reload()}>
-              <RotateCcw />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>Starta om spel</p>
-          </TooltipContent>
-        </Tooltip>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Avsluta spel</p>
+            </TooltipContent>
+          </Tooltip>
+          <DialogPrimitive.Overlay className="fixed inset-0 bg-black/40 z-40" />
+          <DialogPrimitive.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg shadow-lg z-60 flex flex-col text-center items-center border-2">
+            <ConfirmationPopup linkTo='/' leaveGameMem onStart={start} />
+          </DialogPrimitive.Content>
+        </DialogPrimitive.Root>
+
+        <DialogPrimitive.Root>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <DialogPrimitive.Trigger>
+                <Button variant={"ghost"} size={"icon"}>
+                  <RotateCcw />
+                </Button>
+              </DialogPrimitive.Trigger>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Starta om spel</p>
+            </TooltipContent>
+          </Tooltip>
+          <DialogPrimitive.Overlay className="fixed inset-0 bg-black/40 z-40" />
+          <DialogPrimitive.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg shadow-lg z-60 flex flex-col text-center items-center border-2">
+            <ConfirmationPopup restartGameMem onStart={start} />
+          </DialogPrimitive.Content>
+        </DialogPrimitive.Root>
       </div>
 
       <div className="flex flex-col *:items-start">
         <div className='flex flex-row justify-between'>
           <SettingsDialog onStart={start} onPause={pause} />
-          <DifficultyBar/>
+          <DifficultyBar />
+          <PointBar />
           <TimerComponent minutes={minutes} seconds={seconds} onStart={start} onPause={pause} isRunning={isRunning} />
         </div>
         <GridComponent />
@@ -169,6 +173,6 @@ function RouteComponent() {
           </ol>
         )}
       </div>
-    </main>
+    </main >
   );
 }
