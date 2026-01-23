@@ -23,13 +23,15 @@ export const personalities: Personality[] = [
   {
     id: "wolf3",
     name: "Stil-vargen",
-    description: "Du är ett modeorakel som alltid är klädd för att imponera. I varje rum är du den stiligaste vargen folk skådat. Dyker det upp problem? Det löser du med din otroliga charm och ditt skarpa öga för detaljer",
+    description:
+      "Du är ett modeorakel som alltid är klädd för att imponera. I varje rum är du den stiligaste vargen folk skådat. Dyker det upp problem? Det löser du med din otroliga charm och ditt skarpa öga för detaljer",
     img: "https://thumbs.dreamstime.com/b/fashionable-wolf-posing-sunglasses-stylish-wolf-confidently-poses-sleek-black-sunglasses-amidst-snowy-backdrop-339438577.jpg",
   },
   {
     id: "wolf4",
     name: "Tröttis-vargen",
-    description: "Zzzz zz zzzZzzzZ...! Vadå varg? Du är trött och alltid redo för en tupplur.",
+    description:
+      "Zzzz zz zzzZzzzZ...! Vadå varg? Du är trött och alltid redo för en tupplur.",
     img: "https://media.sciencephoto.com/image/c0154994/800wm/C0154994-Gray_wolf_sleeping.jpg",
   },
   {
@@ -42,13 +44,15 @@ export const personalities: Personality[] = [
   {
     id: "wolf6",
     name: "Clown-vargen", // blandning av bus + stil
-    description: "Du har både stil och ett gott sinne för humor. Du älskar att få folk att skratta samtidigt som du ser fantastisk ut.",
+    description:
+      "Du har både stil och ett gott sinne för humor. Du älskar att få folk att skratta samtidigt som du ser fantastisk ut.",
     img: "https://img.itch.zone/aW1nLzIwNTY3NzQ5LmpwZw==/original/97UYf3.jpg",
   },
   {
     id: "wolf7",
     name: "Troll-vargen", // blandning av bus + tröttis
-    description: "Du är en lurig jävel som alltid har en räv bakom örat och gillar att provocera. Helst gör du det bekvämt tillbakalutad, med en god dryck och noll stress.",
+    description:
+      "Du är en lurig jävel som alltid har en räv bakom örat och gillar att provocera. Helst gör du det bekvämt tillbakalutad, med en god dryck och noll stress.",
     img: "https://pbs.twimg.com/media/DgFTf49XUAEmJAB.jpg",
   },
   {
@@ -58,20 +62,20 @@ export const personalities: Personality[] = [
       "Du är en djup och känslosam individ som ofta reflekterar över livets stora frågor. Din stil speglar din inre värld, och du uttrycker dig gärna genom konst, musik eller poesi.",
     img: "https://media.tenor.com/Oz9_quTF7AAAAAAe/emo-werewolf.png",
   },
-   {
+  {
     id: "wolf9",
     name: "Gubb-vargen", // blandning av arg + tröttis
     description:
       "Kanske har du surnat till med åren, eller så är du född tjurig. Oavsett vilket så är du en gubbstrutt som älskar att beklaga dig över både det ena och det andra, men det är okej för du är ju ändå ganska söt.",
     img: "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/292b1350-0273-4658-8d34-3ef4a3039094/d6cp1a1-f29a6db3-f327-4cd4-83c1-761e0a8426e2.jpg/v1/fill/w_1024,h_686,q_75,strp/old_wolf_by_yuukix9_d6cp1a1-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiIvZi8yOTJiMTM1MC0wMjczLTQ2NTgtOGQzNC0zZWY0YTMwMzkwOTQvZDZjcDFhMS1mMjlhNmRiMy1mMzI3LTRjZDQtODNjMS03NjFlMGE4NDI2ZTIuanBnIiwiaGVpZ2h0IjoiPD02ODYiLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS53YXRlcm1hcmsiXSwid21rIjp7InBhdGgiOiIvd20vMjkyYjEzNTAtMDI3My00NjU4LThkMzQtM2VmNGEzMDM5MDk0L3l1dWtpeDktNC5wbmciLCJvcGFjaXR5Ijo5NSwicHJvcG9ydGlvbnMiOjAuNDUsImdyYXZpdHkiOiJjZW50ZXIifX0.cLduzMY0e5nFrbhjvuICh7Q8j4ZQdkQqyBny5eoHSOA",
   },
-   {
+  {
     id: "wolf10",
     name: "Pyjamas-vargen", // blandning av stil + tröttis
     description:
       "B1 och B2 kan slänga sig i väggen, här har vi en stilikon som vet hur man bär upp en outfit med både komfort och elegans.",
     img: "https://i.pinimg.com/474x/ac/52/f8/ac52f8482d51f257bf595ff14d147d8a.jpg",
-  }
+  },
 ];
 
 export type Question = {
@@ -104,20 +108,20 @@ export const questions: Question[] = [
     a3: "Hittar en anledning att klä upp mig.", // stil
     a4: "Sova ut och sen potentiellt sova lite till.", // trött
   },
-    {
+  {
     question: "Vad är viktigast för dig i vardagen?",
     a1: "Att ha roligt.", // bus
     a2: "Att saker går rätt till.", // arg
     a3: "Att få va kreativ.", // stil
     a4: "Att det finns tid för vila och återhämtning.", // trött
   },
-    {
+  {
     question: "Du ska iväg någonstans. Hur förbereder du dig?",
     a1: "Packar i sista minuten, det löser sig längs vägen.", // bus
     a2: "Blir frustrerad över att det är svårt att få tag på den digitala biljetten.", // arg
     a3: "Planerar noga och packar i god tid.", // stil
     a4: "Överväger att stanna hemma istället.", // trött
-  }
+  },
 ];
 
 export function getPersonalityById(id: string): Personality | undefined {
@@ -134,57 +138,4 @@ export const memoryIcons: string[] = [
   "src/assets/wolf-icon (7).png",
   "src/assets/wolf-icon (8).png",
   "src/assets/wolf-icon (9).png",
-]
-
-export type MemoryIconsProps = {
-  id: number
-  name: string
-  img: string
-  matched: boolean
-}
-
-export const MemoryIcons1: MemoryIconsProps[] = [
-  {
-    id: 1,
-    name: "1" ,
-    img: "src/assets/wolf-icon (1).png",
-    matched: false,
-  },
-  {
-    id: 2,
-    name: "2" ,
-    img: "src/assets/wolf-icon (2).png",
-    matched: false,
-  },{
-    id: 3,
-    name: "3" ,
-    img: "src/assets/wolf-icon (3).png",
-    matched: false,
-  },{
-    id: 4,
-    name: "4" ,
-    img: "src/assets/wolf-icon (4).png",
-    matched: false,
-  },{
-    id: 5,
-    name: "5" ,
-    img: "src/assets/wolf-icon (5).png",
-    matched: false,
-  },{
-    id: 6,
-    name: "6" ,
-    img: "src/assets/wolf-icon (6).png",
-    matched: false,
-  },{
-    id: 7,
-    name: "7" ,
-    img: "src/assets/wolf-icon (7).png",
-    matched: false,
-  },{
-    id: 8,
-    name: "7" ,
-    img: "src/assets/wolf-icon (8).png",
-    matched: false,
-  },
-]
-
+];
