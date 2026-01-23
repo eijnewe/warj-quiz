@@ -15,6 +15,7 @@ import { SettingsDialog } from '@/components/settings-component'
 import { ConfirmationPopup } from '@/components/confirmation-popup'
 import { DifficultyBar } from '@/components/difficulty-bar'
 import { PointBar } from '@/components/point-counter-component'
+import { DisplayProfile } from '@/components/display-profile'
 
 export const Route = createFileRoute('/memory/')({
   component: RouteComponent,
@@ -95,7 +96,11 @@ function RouteComponent() {
           <Tooltip>
             <TooltipTrigger asChild>
               <DialogPrimitive.Trigger>
-                <Button className="cursor-pointer" variant={'ghost'} onClick={pause}>
+                <Button
+                  className="cursor-pointer"
+                  variant={'ghost'}
+                  onClick={pause}
+                >
                   <ArrowLeft />
                 </Button>
               </DialogPrimitive.Trigger>
@@ -106,7 +111,7 @@ function RouteComponent() {
           </Tooltip>
           <DialogPrimitive.Overlay className="fixed inset-0 bg-black/40 z-40" />
           <DialogPrimitive.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg shadow-lg z-60 flex flex-col text-center items-center border-2">
-            <ConfirmationPopup linkTo='/' leaveGameMem onStart={start} />
+            <ConfirmationPopup linkTo="/" leaveGameMem onStart={start} />
           </DialogPrimitive.Content>
         </DialogPrimitive.Root>
 
@@ -114,7 +119,7 @@ function RouteComponent() {
           <Tooltip>
             <TooltipTrigger asChild>
               <DialogPrimitive.Trigger>
-                <Button variant={"ghost"} size={"icon"}>
+                <Button variant={'ghost'} size={'icon'}>
                   <RotateCcw />
                 </Button>
               </DialogPrimitive.Trigger>
@@ -135,12 +140,18 @@ function RouteComponent() {
           <SettingsDialog onStart={start} onPause={pause} />
           <DifficultyBar />
           <PointBar />
-          <TimerComponent minutes={minutes} seconds={seconds} onStart={start} onPause={pause} isRunning={isRunning} />
+          <TimerComponent
+            minutes={minutes}
+            seconds={seconds}
+            onStart={start}
+            onPause={pause}
+            isRunning={isRunning}
+          />
         </div>
         <GridComponent />
-        <div className='flex'>
-        <DisplayProfile />
-        <DisplayProfile />
+        <div className="flex">
+          <DisplayProfile />
+          <DisplayProfile />
         </div>
         {/*  <ProfileSelector /> */}
         <Button onClick={finishGame} className="w-fit self-">
@@ -184,6 +195,6 @@ function RouteComponent() {
           </ol>
         }
       </div>
-    </main >
-  );
+    </main>
+  )
 }
