@@ -12,14 +12,15 @@ import { questions } from '@/assets/data'
 import { QuestionComponent } from '@/components/question-component'
 import { Dialog as DialogPrimitive } from 'radix-ui'
 import { getResult } from '@/lib/quiz-utils'
+import { CreateProfile } from '@/components/create-profile'
 
-export const Route = createFileRoute("/quiz/")({
+export const Route = createFileRoute('/quiz/')({
   component: RouteComponent,
-});
+})
 
 function RouteComponent() {
-  const totalQuestions = questions.length;
-  const [answeredQuestions, setAnsweredQuestions] = useState<string[]>([]);
+  const totalQuestions = questions.length
+  const [answeredQuestions, setAnsweredQuestions] = useState<string[]>([])
 
   const answeredCount = answeredQuestions.length
   const currentQuestion = Math.min(answeredCount + 1, totalQuestions)
@@ -27,7 +28,7 @@ function RouteComponent() {
   const isComplete = answeredCount === totalQuestions
 
   function handleAnswer(answerKey: string) {
-    setAnsweredQuestions((prev) => [...prev, answerKey]);
+    setAnsweredQuestions((prev) => [...prev, answerKey])
   }
 
   const wolfId = isComplete ? getResult(answeredQuestions) : ''
@@ -44,7 +45,11 @@ function RouteComponent() {
               <Pointer />
             </Button>
           </DialogPrimitive.Close>
-          <Button variant={"default"} className="flex flex-row items-center text-xs cursor-pointer" onClick={() => router.history.back()}>
+          <Button
+            variant={'default'}
+            className="flex flex-row items-center text-xs cursor-pointer"
+            onClick={() => router.history.back()}
+          >
             <ArrowLeft />
             Tillbaka
           </Button>
@@ -54,7 +59,7 @@ function RouteComponent() {
         <Tooltip>
           <TooltipTrigger asChild>
             <Link to="/">
-              <Button variant={"ghost"}>
+              <Button variant={'ghost'}>
                 <ArrowLeft />
                 Avbryt quiz
               </Button>
@@ -66,7 +71,11 @@ function RouteComponent() {
         </Tooltip>
         <Tooltip>
           <TooltipTrigger asChild>
-            <Button variant={"ghost"} size={"icon"} onClick={() => window.location.reload()}>
+            <Button
+              variant={'ghost'}
+              size={'icon'}
+              onClick={() => window.location.reload()}
+            >
               <RotateCcw />
             </Button>
           </TooltipTrigger>
@@ -93,6 +102,8 @@ function RouteComponent() {
 
       <Progress value={progressValue} className="w-[80%] mx-auto" />
 
+      <CreateProfile />
+
       {/* <ButtonGroup>
         <Button>
           <ArrowLeft />
@@ -108,5 +119,5 @@ function RouteComponent() {
         </Button>
       </ButtonGroup> */}
     </main>
-  );
+  )
 }

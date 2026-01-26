@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as QuizIndexRouteImport } from './routes/quiz/index'
 import { Route as MemoryIndexRouteImport } from './routes/memory/index'
+import { Route as DndIndexRouteImport } from './routes/dnd/index'
 import { Route as QuizTestRouteImport } from './routes/quiz/test'
 import { Route as QuizHistoryRouteImport } from './routes/quiz/history'
 import { Route as MemoryHistoryRouteImport } from './routes/memory/history'
@@ -30,6 +31,11 @@ const QuizIndexRoute = QuizIndexRouteImport.update({
 const MemoryIndexRoute = MemoryIndexRouteImport.update({
   id: '/memory/',
   path: '/memory/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DndIndexRoute = DndIndexRouteImport.update({
+  id: '/dnd/',
+  path: '/dnd/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const QuizTestRoute = QuizTestRouteImport.update({
@@ -58,6 +64,7 @@ export interface FileRoutesByFullPath {
   '/memory/history': typeof MemoryHistoryRoute
   '/quiz/history': typeof QuizHistoryRoute
   '/quiz/test': typeof QuizTestRoute
+  '/dnd': typeof DndIndexRoute
   '/memory': typeof MemoryIndexRoute
   '/quiz': typeof QuizIndexRoute
   '/quiz/results/$wolfId': typeof QuizResultsWolfIdRoute
@@ -67,6 +74,7 @@ export interface FileRoutesByTo {
   '/memory/history': typeof MemoryHistoryRoute
   '/quiz/history': typeof QuizHistoryRoute
   '/quiz/test': typeof QuizTestRoute
+  '/dnd': typeof DndIndexRoute
   '/memory': typeof MemoryIndexRoute
   '/quiz': typeof QuizIndexRoute
   '/quiz/results/$wolfId': typeof QuizResultsWolfIdRoute
@@ -77,6 +85,7 @@ export interface FileRoutesById {
   '/memory/history': typeof MemoryHistoryRoute
   '/quiz/history': typeof QuizHistoryRoute
   '/quiz/test': typeof QuizTestRoute
+  '/dnd/': typeof DndIndexRoute
   '/memory/': typeof MemoryIndexRoute
   '/quiz/': typeof QuizIndexRoute
   '/quiz/results/$wolfId': typeof QuizResultsWolfIdRoute
@@ -88,6 +97,7 @@ export interface FileRouteTypes {
     | '/memory/history'
     | '/quiz/history'
     | '/quiz/test'
+    | '/dnd'
     | '/memory'
     | '/quiz'
     | '/quiz/results/$wolfId'
@@ -97,6 +107,7 @@ export interface FileRouteTypes {
     | '/memory/history'
     | '/quiz/history'
     | '/quiz/test'
+    | '/dnd'
     | '/memory'
     | '/quiz'
     | '/quiz/results/$wolfId'
@@ -106,6 +117,7 @@ export interface FileRouteTypes {
     | '/memory/history'
     | '/quiz/history'
     | '/quiz/test'
+    | '/dnd/'
     | '/memory/'
     | '/quiz/'
     | '/quiz/results/$wolfId'
@@ -116,6 +128,7 @@ export interface RootRouteChildren {
   MemoryHistoryRoute: typeof MemoryHistoryRoute
   QuizHistoryRoute: typeof QuizHistoryRoute
   QuizTestRoute: typeof QuizTestRoute
+  DndIndexRoute: typeof DndIndexRoute
   MemoryIndexRoute: typeof MemoryIndexRoute
   QuizIndexRoute: typeof QuizIndexRoute
   QuizResultsWolfIdRoute: typeof QuizResultsWolfIdRoute
@@ -142,6 +155,13 @@ declare module '@tanstack/react-router' {
       path: '/memory'
       fullPath: '/memory'
       preLoaderRoute: typeof MemoryIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dnd/': {
+      id: '/dnd/'
+      path: '/dnd'
+      fullPath: '/dnd'
+      preLoaderRoute: typeof DndIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/quiz/test': {
@@ -180,6 +200,7 @@ const rootRouteChildren: RootRouteChildren = {
   MemoryHistoryRoute: MemoryHistoryRoute,
   QuizHistoryRoute: QuizHistoryRoute,
   QuizTestRoute: QuizTestRoute,
+  DndIndexRoute: DndIndexRoute,
   MemoryIndexRoute: MemoryIndexRoute,
   QuizIndexRoute: QuizIndexRoute,
   QuizResultsWolfIdRoute: QuizResultsWolfIdRoute,

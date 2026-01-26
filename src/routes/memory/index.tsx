@@ -7,21 +7,22 @@ import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { Dialog as DialogPrimitive } from "radix-ui";
-import { TimerComponent } from "@/components/timer-component";
-import { useStopwatch } from "react-timer-hook";
-import { SettingsDialog } from "@/components/settings-component";
-import { ConfirmationPopup } from "@/components/confirmation-popup";
-import { DifficultyBar } from "@/components/difficulty-bar";
-import { PointBar } from "@/components/point-counter-component";
+} from '@/components/ui/tooltip'
+import { Dialog as DialogPrimitive } from 'radix-ui'
+import { TimerComponent } from '@/components/timer-component'
+import { useStopwatch } from 'react-timer-hook'
+import { SettingsDialog } from '@/components/settings-component'
+import { ConfirmationPopup } from '@/components/confirmation-popup'
+import { DifficultyBar } from '@/components/difficulty-bar'
+import { PointBar } from '@/components/point-counter-component'
+import { DisplayProfile } from '@/components/display-profile'
 
-export const Route = createFileRoute("/memory/")({
+export const Route = createFileRoute('/memory/')({
   component: RouteComponent,
-});
+})
 
 function RouteComponent() {
-  const router = useRouter();
+  const router = useRouter()
 
   // point counter
   const [points, setPoints] = useState(0);
@@ -32,14 +33,14 @@ function RouteComponent() {
   // stopwatch stuff
   const { seconds, minutes, pause, start, isRunning } = useStopwatch({
     autoStart: false,
-  });
+  })
 
   // state för resultat
   const [result, setResult] = useState<{
-    score: number;
-    time: number;
-    date: string;
-  } | null>(null);
+    score: number
+    time: number
+    date: string
+  } | null>(null)
 
   // funktion för att avsluta spelet och spara resultat
   const finishGame = useCallback(() => {
@@ -53,37 +54,37 @@ function RouteComponent() {
       score: points,
       time: totalSeconds,
       date: new Date().toISOString(),
-    };
+    }
 
-    setResult(newResult);
+    setResult(newResult)
 
-    const prev = JSON.parse(localStorage.getItem("memoryResults") ?? "[]");
+    const prev = JSON.parse(localStorage.getItem('memoryResults') ?? '[]')
 
     localStorage.setItem("memoryResults", JSON.stringify([...prev, newResult]));
   }, [minutes, seconds, points, pause, result]);
 
   // topplista (topp 5)
   const topResults: {
-    score: number;
-    time: number;
-    date: string;
-  }[] = JSON.parse(localStorage.getItem("memoryResults") ?? "[]")
+    score: number
+    time: number
+    date: string
+  }[] = JSON.parse(localStorage.getItem('memoryResults') ?? '[]')
     .sort((a, b) => b.score - a.score)
-    .slice(0, 5);
+    .slice(0, 5)
 
   const formatTime = (totalSeconds: number) => {
-    const mins = Math.floor(totalSeconds / 60);
-    const secs = totalSeconds % 60;
+    const mins = Math.floor(totalSeconds / 60)
+    const secs = totalSeconds % 60
 
-    return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
-  };
+    return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`
+  }
 
   return (
     <main>
       <DialogPrimitive.Root defaultOpen={true}>
         <DialogPrimitive.Overlay className="fixed inset-0 bg-black/85 z-40" />
         <DialogPrimitive.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-card/90 text-card-foreground border border-border p-6 rounded-lg shadow-lg z-60 flex flex-col text-center items-center *:m-2 border-2">
-          <DialogPrimitive.Close aria-label="Close">
+          <DialogPrimitive.Close aria-label="Close" asChild>
             <Button className="cursor-pointer text-2xl p-7" onClick={start}>
               Starta Memoryspel!
               <Pointer />
@@ -91,7 +92,7 @@ function RouteComponent() {
           </DialogPrimitive.Close>
           <div className="flex flex-row items-start">
             <Button
-              variant={"default"}
+              variant={'default'}
               className=" m-1 h-8 p-0.5 text-xs cursor-pointer"
               onClick={() => router.history.back()}
             >
@@ -106,10 +107,10 @@ function RouteComponent() {
         <DialogPrimitive.Root>
           <Tooltip>
             <TooltipTrigger asChild>
-              <DialogPrimitive.Trigger>
+              <DialogPrimitive.Trigger asChild>
                 <Button
                   className="cursor-pointer"
-                  variant={"ghost"}
+                  variant={'ghost'}
                   onClick={pause}
                 >
                   <ArrowLeft />
@@ -129,8 +130,8 @@ function RouteComponent() {
         <DialogPrimitive.Root>
           <Tooltip>
             <TooltipTrigger asChild>
-              <DialogPrimitive.Trigger>
-                <Button variant={"ghost"} size={"icon"}>
+              <DialogPrimitive.Trigger asChild>
+                <Button variant={'ghost'} size={'icon'}>
                   <RotateCcw />
                 </Button>
               </DialogPrimitive.Trigger>
@@ -150,7 +151,7 @@ function RouteComponent() {
         <div className="flex flex-row justify-between">
           <SettingsDialog onStart={start} onPause={pause} />
           <DifficultyBar />
-          <PointBar points={points} />
+          <PointBar />
           <TimerComponent
             minutes={minutes}
             seconds={seconds}
@@ -193,17 +194,16 @@ function RouteComponent() {
         {/* Topplista */}
         <h2 className="mt-6 font-bold">Topplista</h2>
 
-        {topResults.length === 0 ? (
+        {topResults.length === 0 ?
           <p className="text-sm">Inga resultat ännu</p>
-        ) : (
-          <ol>
+        : <ol>
             {topResults.map((r, i) => (
               <li key={i}>
                 {r.score} p · {r.time}s
               </li>
             ))}
           </ol>
-        )}
+        }
       </div>
     </main>
   );
