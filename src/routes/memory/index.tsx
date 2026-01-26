@@ -1,8 +1,8 @@
-import { useState } from 'react'
-import { createFileRoute, useRouter } from '@tanstack/react-router'
-import { GridComponent } from '@/components/grid-component'
-import { Button } from '@/components/ui/button'
-import { ArrowLeft, Pointer, RotateCcw } from 'lucide-react'
+import { useState, useCallback } from "react";
+import { createFileRoute, useRouter } from "@tanstack/react-router";
+import { GridComponent } from "@/components/grid-component";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft, Pointer, RotateCcw } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
@@ -24,6 +24,12 @@ export const Route = createFileRoute('/memory/')({
 function RouteComponent() {
   const router = useRouter()
 
+  // point counter
+  const [points, setPoints] = useState(0);
+  const handlePointsChange = (newP: number) => {
+    setPoints((prevP) => prevP + newP);
+  };
+
   // stopwatch stuff
   const { seconds, minutes, pause, start, isRunning } = useStopwatch({
     autoStart: false,
@@ -37,10 +43,16 @@ function RouteComponent() {
   } | null>(null)
 
   // funktion för att avsluta spelet och spara resultat
-  const finishGame = () => {
+  const finishGame = useCallback(() => {
+    if (result) return;
+
+    pause();
+
+    const totalSeconds = minutes * 60 + seconds;
+
     const newResult = {
-      score: 120,
-      time: 85,
+      score: points,
+      time: totalSeconds,
       date: new Date().toISOString(),
     }
 
@@ -48,8 +60,8 @@ function RouteComponent() {
 
     const prev = JSON.parse(localStorage.getItem('memoryResults') ?? '[]')
 
-    localStorage.setItem('memoryResults', JSON.stringify([...prev, newResult]))
-  }
+    localStorage.setItem("memoryResults", JSON.stringify([...prev, newResult]));
+  }, [minutes, seconds, points, pause, result]);
 
   // topplista (topp 5)
   const topResults: {
@@ -148,12 +160,10 @@ function RouteComponent() {
             isRunning={isRunning}
           />
         </div>
-        <GridComponent />
-        <div className="flex">
-          <DisplayProfile />
-          <DisplayProfile />
-        </div>
-        {/*  <ProfileSelector /> */}
+        <GridComponent
+          onPointsChange={handlePointsChange}
+          onGameComplete={finishGame}
+        />
         <Button onClick={finishGame} className="w-fit self-">
           Visa resultat
         </Button>
@@ -165,17 +175,17 @@ function RouteComponent() {
               <span className="font-bold">Poäng:</span> {result.score}
             </p>
             <p>
-              <span className="font-bold">Tid:</span>{' '}
-              {formatTime(result.time)}{' '}
+              <span className="font-bold">Tid:</span>{" "}
+              {formatTime(result.time)}{" "}
             </p>
             <p>
-              <span className="font-bold"> Datum:</span>{' '}
-              {new Date(result.date).toLocaleString('sv-SE', {
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit',
-                hour: '2-digit',
-                minute: '2-digit',
+              <span className="font-bold"> Datum:</span>{" "}
+              {new Date(result.date).toLocaleString("sv-SE", {
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+                hour: "2-digit",
+                minute: "2-digit",
               })}
             </p>
           </div>
@@ -196,5 +206,5 @@ function RouteComponent() {
         }
       </div>
     </main>
-  )
+  );
 }

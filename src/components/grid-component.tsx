@@ -7,7 +7,12 @@ type Card = {
   icon: string;
 };
 
-export function GridComponent() {
+interface GridComponentProps {
+  onPointsChange: (newP: number) => void;
+  onGameComplete: () => void;
+}
+
+export function GridComponent({ onPointsChange, onGameComplete }: GridComponentProps) {
   const [cards] = useState<Card[]>(() => {
     const doubledIcons = [...memoryIcons, ...memoryIcons];
     return doubledIcons
@@ -24,6 +29,12 @@ export function GridComponent() {
   const [isChecking, setIsChecking] = useState(false);
 
   useEffect(() => {
+    if (matchedCards.length === cards.length && cards.length > 0) {
+      onGameComplete();
+    }
+  }, [matchedCards, cards.length, onGameComplete]);
+  
+  useEffect(() => {
     setTimeout(() => {
       if (flippedCards.length === 2) {
         setIsChecking(true);
@@ -36,17 +47,19 @@ export function GridComponent() {
           setMatchedCards((prev) => [...prev, firstIndex, secondIndex]);
           setFlippedCards([]);
           setIsChecking(false);
+          onPointsChange(5);
         } else {
           setWrongCards([firstIndex, secondIndex]);
           setTimeout(() => {
             setWrongCards([]);
             setFlippedCards([]);
             setIsChecking(false);
-          }, 1500);
+            onPointsChange(-1)
+          }, 700);
         }
       }
     }, 600);
-  }, [flippedCards, cards]);
+  }, [flippedCards, cards, onPointsChange]);
 
   const handleCardClick = (index: number) => {
     if (
