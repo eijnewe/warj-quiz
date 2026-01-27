@@ -30,9 +30,7 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-
-
+} from '@/components/ui/dropdown-menu'
 
 export const Route = createFileRoute('/quiz/')({
   component: RouteComponent,
@@ -58,7 +56,7 @@ function RouteComponent() {
 
   const router = useRouter()
   return (
-    <main className='p-4 h-[80vh] flex flex-col'>
+    <main className="p-4 h-[80vh] flex flex-col">
       <DialogPrimitive.Root defaultOpen={true}>
         <DialogPrimitive.Overlay className="fixed inset-0 bg-black/85 z-40" />
         <DialogPrimitive.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-card/90 text-card-foreground border-border p-6 rounded-lg shadow-lg z-60 flex flex-col text-center items-center *:m-2 border-2">
@@ -79,7 +77,6 @@ function RouteComponent() {
         </DialogPrimitive.Content>
       </DialogPrimitive.Root>
       <div className="flex justify-between">
-
         <DialogPrimitive.Root>
           <Tooltip>
             <TooltipTrigger asChild>
@@ -99,7 +96,6 @@ function RouteComponent() {
           </DialogPrimitive.Content>
         </DialogPrimitive.Root>
 
-
         <DialogPrimitive.Root>
           <Tooltip>
             <TooltipTrigger asChild>
@@ -118,7 +114,6 @@ function RouteComponent() {
             <ConfirmationPopup restartGameMem onStart={start} />
           </DialogPrimitive.Content>
         </DialogPrimitive.Root>
-
       </div>
       {!isComplete && (
         <h2 className="font-semibold p-3 text-shadow-white text-shadow-lg/50 dark:text-shadow-4xl/80 dark:text-shadow-amber-900 tracking-wide">
@@ -134,11 +129,11 @@ function RouteComponent() {
             </Link>
           </Button>
         </div>
-        : <QuestionComponent onAnswer={handleAnswer} />}
+      : <QuestionComponent onAnswer={handleAnswer} />}
 
       <Progress value={progressValue} className="w-[80%] mx-auto mt-auto" />
 
-       <CreateProfile /> 
+      {/*  <CreateProfile />
        <DisplayProfile/>
       <DropdownMenu>
          <DropdownMenuTrigger asChild>
@@ -147,7 +142,7 @@ function RouteComponent() {
       <DropdownMenuContent>
      <ProfileSelector/>
       </DropdownMenuContent>
-        </DropdownMenu>
+        </DropdownMenu> */}
     </main>
   )
 }
