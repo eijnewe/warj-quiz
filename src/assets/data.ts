@@ -74,7 +74,7 @@ export const personalities: Personality[] = [
     name: "Pyjamas-vargen", // blandning av stil + tröttis
     description:
       "B1 och B2 kan slänga sig i väggen, här har vi en stilikon som vet hur man bär upp en outfit med både komfort och elegans.",
-    img: "https://share.google/9ruQvmhUffQUg9rvQ",
+    img: "/src/assets/Sleepyvarg.jpg",
   },
 ];
 
@@ -194,3 +194,25 @@ export const MatchArray: MatchItem[] = [
     src: "src/assets/wolf-pairs/pair-6-b.png"
   }
 ]
+
+export const MemoryCardsFullList: string[] = [
+  "src/assets/wolf-icon (1).png",
+  "src/assets/wolf-icon (2).png",
+  "src/assets/wolf-icon (3).png",
+  "src/assets/wolf-icon (4).png",
+  "src/assets/wolf-icon (5).png",
+  "src/assets/wolf-icon (6).png",
+  "src/assets/wolf-icon (7).png",
+  "src/assets/wolf-icon (8).png",
+  "src/assets/wolf-icon (9).png",
+  "src/assets/wolf-icon (10).png",
+  "src/assets/wolf-icon (11).png",
+  "src/assets/wolf-icon (12).png",
+  "src/assets/wolf-icon (13).png",
+  "src/assets/wolf-icon (14).png",
+  "src/assets/wolf-icon (15).png",
+  "src/assets/wolf-icon (16).png",
+  "src/assets/wolf-icon (17).png",
+  "src/assets/wolf-icon (18).png",
+  "src/assets/wolf-icon (19).png",
+  "src/assets/wolf-icon (20).png" ] 

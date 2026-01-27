@@ -57,7 +57,7 @@ export function QuestionComponent({ onAnswer }: Props) {
       <h1 className="font-bold uppercase mb-4 text-center text-lg text-shadow-white text-shadow-lg/50 dark:text-shadow-4xl/80 dark:text-shadow-amber-900">{question.question}</h1>
       {(
         answers.map((answer) => (
-          <Button key={answer.key} variant={"outline"} className="cursor-pointer wrap-break-words whitespace-normal h-fit drop-shadow-md w-[80vw] bg-card" onClick={() => handleClick(answer.key)}>
+          <Button key={answer.key} variant={"outline"} className="wrap-break-words whitespace-normal h-fit drop-shadow-md w-[80vw] bg-card" onClick={() => handleClick(answer.key)}>
             {answer.value}
           </Button>
         ))

@@ -18,7 +18,7 @@ export function ConfirmationPopup({
   restartGameMem?: boolean
 }) {
   return (
-    <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-card text-card-foreground border-border p-6 rounded-lg shadow-lg z-60 flex flex-col text-center items-center border-2 min-w-[60vw]">
+    <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-card text-card-foreground border-border p-6 rounded-lg shadow-lg z-60 flex flex-col text-center items-center border-2">
       <h1>
         Är du säker på att du vill
         {chosenDiff || chosenPlayers ?
@@ -39,7 +39,6 @@ export function ConfirmationPopup({
       </h1>
       <div className="flex *:m-1 mt-2">
         <Button asChild
-          className="cursor-pointer"
           onClick={
             restartGameMem ? () => globalThis.location.reload() : undefined
           }
@@ -50,7 +49,6 @@ export function ConfirmationPopup({
         </Button>
         <DialogPrimitive.Close aria-label="Close" className="self-end" asChild>
           <Button
-            className="cursor-pointer"
             onClick={leaveGameMem ? onStart : undefined}
           >
             Avbryt

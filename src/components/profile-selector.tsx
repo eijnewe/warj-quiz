@@ -45,7 +45,7 @@ export function ProfileSelector() {
   }
 
   return (
-    <div className="space-y-2">
+    <div className="profileselector">
       {/* <div className="flex gap-2">
         <Button onClick={() => setCreating((c) => !c)}>
           {creating ? 'Cancel' : 'Create profile'}

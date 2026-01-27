@@ -55,17 +55,6 @@ function RouteComponent() {
     });
   };
 
-  const [showWolf, setShowWolf] = useState(false);
-
-useEffect(() => {
-  const onScroll = () => {
-    setShowWolf(window.scrollY > 200);
-  };
-
-  window.addEventListener("scroll", onScroll);
-  return () => window.removeEventListener("scroll", onScroll);
-}, []);
-
   // Sortera resultaten så att högst poängen i memory kommer först
   // const sortedResults = [...results].sort(
   //   (a, b) => b.score - a.score
@@ -78,7 +67,6 @@ useEffect(() => {
         <Accordion.Root type="multiple" className=" w-full
         *:bg-accent
         *:m-4
-        *:p-4
         *:flex
         *:flex-col
         *:rounded-2xl
@@ -87,17 +75,17 @@ useEffect(() => {
     *:hover:bg-accent/80
         ">
           {/* item 1 */}
-          <Accordion.Item value="item-1" className="">
-            <Accordion.Trigger className="flex justify-center cursor-pointer pb-2 ">
-              Quiz
+          <Accordion.Item value="item-1" className="p-2">
+            <Accordion.Trigger className="flex justify-center m-2 text-xl">
+              <h2>Quiz</h2>
               <ArrowDown />
             </Accordion.Trigger>
-            <Accordion.Content>
-              <div className="flex flex-col items-center justify-center p-4 ">
+            <Accordion.Content className="m-2">
+              <div className="flex flex-col items-center justify-center">
                 {history.length === 0 ? (
                   <div className="*:m-2 flex flex-col items-center ">
                     <p className="">Inga tidigare resultat</p>
-                    <Button className="cursor-pointer" asChild>
+                    <Button asChild>
                       <Link to="/quiz">
                         Gör quizzet
                       </Link>
@@ -113,7 +101,7 @@ useEffect(() => {
                         </div>
                       ))}
                     </div>
-                    <Button onClick={handleClear} variant="destructive" className="cursor-pointer mt-6">
+                    <Button onClick={handleClear} variant="destructive" className="mt-6">
                       Rensa historik
                     </Button>
                   </>
@@ -123,54 +111,43 @@ useEffect(() => {
           </Accordion.Item>
 
           {/* item 2 */}
-          <Accordion.Item value="item-2" className="">
-            <Accordion.Trigger className="flex justify-center pb-2 cursor-pointer">
-              Memory
+          <Accordion.Item value="item-2" className="p-2">
+            <Accordion.Trigger className="flex justify-center m-2 text-xl">
+              <h2>Memory</h2>
               <ArrowDown />
             </Accordion.Trigger>
-            <Accordion.Content>
-              <div className="p-4 space-y-3">
+            <Accordion.Content className="m-3">
+
+              <div className="space-y-3">
                 {memoryHistory.length === 0 ? (
                   <p className="text-center text-sm text-muted-foreground">
                     Inga memory-resultat ännu
                   </p>
                 ) : (
-                  <ul className="space-y-2">
+                  <div className="flex justify-center flex-wrap">
                     {memoryHistory.map((r, i) => (
-                      <li key={i} className="text-sm text-left flex flex-col gap-1 p-3">
+                      <div key={i} className="text-sm text-left flex flex-col gap-1 p-3 bg-card text-card-foreground rounded-lg shadow-md/20 aspect-square m-2 justify-evenly">
                         <div className="flex items-center gap-2 font-medium">
                           🐺
                         </div>
-
                         <div>
                           <span className="font-bold">Poäng:</span> {r.points}
                         </div>
-
                         <div>
                           <span className="font-bold">Tid:</span> {r.time} sekunder
                         </div>
-
                         <div>
                           <span className="font-bold">Svårighet:</span> {r.difficulty}
                         </div>
-
-                        <div className="text-xs text-muted-foreground">
+                        <div className="text-xs text-muted-foreground text-center">
                           {formatDate(r.date)}
                         </div>
-
-                      </li>
-
+                      </div>
                     ))}
-
-                  </ul>
-
-                  
-
+                  </div>
                 )}
               </div>
-
-
-              <Button className="cursor-pointer" asChild>
+              <Button className="mt-6" asChild>
                 <Link to="/memory">
                   Spela memory
                 </Link>
@@ -179,13 +156,13 @@ useEffect(() => {
           </Accordion.Item>
 
           {/* item 3 */}
-          <Accordion.Item value="item-3">
-            <Accordion.Trigger className="flex justify-center pb-2 cursor-pointer">
-              Matcha varg
+          <Accordion.Item value="item-3" className="p-2">
+            <Accordion.Trigger className="flex justify-center m-2 text-xl">
+              <h2>Matcha Varg</h2>
               <ArrowDown />
             </Accordion.Trigger>
 
-            <Accordion.Content>
+            <Accordion.Content className="m-3">
               <div className="p-4 space-y-3">
                 {matchaVargHistory.length === 0 ? (
                   <p className="text-center text-sm text-muted-foreground">
@@ -201,36 +178,29 @@ useEffect(() => {
                   </ul>
                 )}
               </div>
-              <Button className="cursor-pointer" asChild>
+              <Button className="mt-6" asChild>
                 <Link to="/dnd">
-                  Matcha varg
+                  Spela Matcha varg
                 </Link>
               </Button>
             </Accordion.Content>
           </Accordion.Item>
         </Accordion.Root>
 
-        <Button className="cursor-pointer mt-6" asChild>
+        <Button className="mt-6" asChild>
           <Link to="/">
             Tillbaka hem
           </Link>
         </Button>
-<img
-  src={wolfHappy}
-  alt="Glad varg"
-  className="  fixed
-        bottom-0
-        left-0
-        w-32
-        z-0
-        pointer-events-none
-        opacity-80"
-/>
-      </div>
+        <div className="w-full flex justify-start">
 
- 
+          <img
+            src={wolfHappy}
+            alt="Glad varg"
+            className=" fixed bottom-0 left-0 w-32 z-0 pointer-events-none opacity-80"
+          />
+        </div>
+      </div>
     </main>
-    
-    
   );
 }
