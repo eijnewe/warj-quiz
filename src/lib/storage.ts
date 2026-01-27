@@ -1,3 +1,7 @@
+/* ======================================================
+   QUIZ – RESULTAT (History)
+====================================================== */
+
 export type SavedResult = {
   id: string
   date: number
@@ -29,7 +33,80 @@ export function clearHistory() {
   localStorage.removeItem(STORAGE_KEY)
 }
 
-/* ---------------- Player storage helpers ---------------- */
+
+/* ======================================================
+   MEMORY – RESULTAT (History)
+====================================================== */
+
+export type MemoryResult = {
+  points: number
+  time: number
+  date: number
+  difficulty: 'easy' | 'medium' | 'hard'
+
+}
+
+const MEMORY_KEY = 'quiz:memory'
+
+export function getMemoryHistory(): MemoryResult[] {
+  try {
+    const raw = localStorage.getItem(MEMORY_KEY)
+    return raw ? (JSON.parse(raw) as MemoryResult[]) : []
+  } catch {
+    return []
+  }
+}
+
+export function saveMemoryResult(entry: MemoryResult) {
+  try {
+    const list = getMemoryHistory()
+    list.unshift(entry)
+    localStorage.setItem(MEMORY_KEY, JSON.stringify(list))
+  } catch {
+    // ignore
+  }
+}
+
+export function clearMemoryHistory() {
+  localStorage.removeItem(MEMORY_KEY)
+}
+
+
+/* ======================================================
+   MATCHA VARG – RESULTAT (History)
+====================================================== */
+
+export type MatchaVarg = {
+  score: number
+  date: number
+}
+
+const MATCHA_VARG_KEY = 'quiz:matcha_varg'
+
+export function getMatchaVargHistory(): MatchaVarg[] {
+  try {
+    const raw = localStorage.getItem(MATCHA_VARG_KEY)
+    return raw ? (JSON.parse(raw) as MatchaVarg[]) : []
+  } catch {
+    return []
+  }
+}
+
+export function saveMatchaVargResult(entry: MatchaVarg) {
+  try {
+    const list = getMatchaVargHistory()
+    list.unshift(entry)
+    localStorage.setItem(MATCHA_VARG_KEY, JSON.stringify(list))
+  } catch {}
+}
+
+export function clearMatchaVargHistory() {
+  localStorage.removeItem(MATCHA_VARG_KEY)
+}
+
+/* ======================================================
+  PLAYER STORAGE HELPERS - PROFILER
+====================================================== */
 
 export type Player = {
   id: string

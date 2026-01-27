@@ -35,10 +35,10 @@ function RouteComponent() {
 
   const router = useRouter()
   return (
-    <main>
+    <main className='p-4 h-[80vh] flex flex-col'>
       <DialogPrimitive.Root defaultOpen={true}>
         <DialogPrimitive.Overlay className="fixed inset-0 bg-black/85 z-40" />
-        <DialogPrimitive.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-card/90 text-card-foreground border border-border p-6 rounded-lg shadow-lg z-60 flex flex-col text-center items-center *:m-2 border-2">
+        <DialogPrimitive.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-card/90 text-card-foreground border-border p-6 rounded-lg shadow-lg z-60 flex flex-col text-center items-center *:m-2 border-2">
           <DialogPrimitive.Close aria-label="Close" asChild>
             <Button className="cursor-pointer text-2xl p-7">
               Starta Quizzet!
@@ -55,15 +55,14 @@ function RouteComponent() {
           </Button>
         </DialogPrimitive.Content>
       </DialogPrimitive.Root>
-      <div className="flex justify-between p-2">
+      <div className="flex justify-between">
         <Tooltip>
           <TooltipTrigger asChild>
-            <Link to="/">
-              <Button variant={'ghost'}>
+            <Button variant={'ghost'} asChild>
+              <Link to="/">
                 <ArrowLeft />
-                Avbryt quiz
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </TooltipTrigger>
           <TooltipContent>
             <p>Avsluta quiz</p>
@@ -85,7 +84,7 @@ function RouteComponent() {
         </Tooltip>
       </div>
       {!isComplete && (
-        <h2 className="font-semibold p-3">
+        <h2 className="font-semibold p-3 text-shadow-white text-shadow-lg/50 dark:text-shadow-4xl/80 dark:text-shadow-amber-900 tracking-wide">
           Fråga {currentQuestion} av {totalQuestions}
         </h2>
       )}
@@ -98,26 +97,11 @@ function RouteComponent() {
             </Link>
           </Button>
         </div>
-      : <QuestionComponent onAnswer={handleAnswer} />}
+        : <QuestionComponent onAnswer={handleAnswer} />}
 
-      <Progress value={progressValue} className="w-[80%] mx-auto" />
+      <Progress value={progressValue} className="w-[80%] mx-auto mt-auto" />
 
-      <CreateProfile />
-
-      {/* <ButtonGroup>
-        <Button>
-          <ArrowLeft />
-          Back
-        </Button>
-        <Button>
-          <RotateCcw />
-          Restart Quiz
-        </Button>
-        <Button>
-          Next
-          <ArrowRight />
-        </Button>
-      </ButtonGroup> */}
+      {/* <CreateProfile /> */}
     </main>
   )
 }

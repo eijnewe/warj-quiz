@@ -11,7 +11,7 @@ const router = createRouter({
 })
 
 createRoot(document.getElementById('root')!).render(
-    <ThemeProvider storageKey="vite-ui-theme">
+<ThemeProvider storageKey="vite-ui-theme">
       <RouterProvider router={router}></RouterProvider>
       <Toaster/>
     </ThemeProvider>

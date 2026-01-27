@@ -1,10 +1,11 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router'
 import WolfComponent from '@/components/wolf-component'
 import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import JSConfetti from 'js-confetti'
 import { saveResult } from '@/lib/storage'
 import type { WolfType } from '@/lib/quiz-utils'
+import { ArrowLeft } from 'lucide-react'
 
 export const Route = createFileRoute('/quiz/results/$wolfId')({
   component: RouteComponent,
@@ -27,13 +28,19 @@ function RouteComponent() {
   }, [wolfId])
 
   return (
-    <main>
+    <main className='p-4'>
       <div className="flex flex-col justify-center items-center m-2 *:m-2">
         <h1 className="font-bold uppercase mb-4 text-3xl">Du är...</h1>
 
         {showResult ?
           <WolfComponent id={wolfId} />
-        : <div>Beräknar resultat...</div>}
+          : <div>Beräknar resultat...</div>}
+        <Button className='flex' asChild>
+          <Link to="/">
+            <ArrowLeft />
+            Tillbaka
+          </Link>
+        </Button>
       </div>
     </main>
   )

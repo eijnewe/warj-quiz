@@ -32,7 +32,7 @@ export function SettingsDialog({
         <DialogPrimitive.Root>
             <Tooltip>
             <TooltipTrigger asChild>
-            <DialogPrimitive.Trigger>
+            <DialogPrimitive.Trigger asChild>
                 <Button className="cursor-pointer m-1 w-8 h-8 p-0.5  hover:bg-amber-300 hover:text-black border-2 drop-shadow-sm/30 rounded-lg border-black" onClick={onPause}>
                     <Settings />
                 </Button>
@@ -43,7 +43,7 @@ export function SettingsDialog({
             </TooltipContent>
             </Tooltip>
             <DialogPrimitive.Overlay className="fixed inset-0 bg-black/40 z-40" />
-            <DialogPrimitive.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg shadow-lg z-60 flex flex-col text-center items-center border-2 w-[40vw]">
+            <DialogPrimitive.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-card text-card-foreground border-border p-6 rounded-lg shadow-lg z-60 flex flex-col text-center items-center border-2">
                 <DialogPrimitive.Close aria-label="Close" className="self-end">
                     <Button className="cursor-pointer w-7 h-7" onClick={isMainMenu ? onPause : onStart}
                     >
@@ -60,7 +60,7 @@ export function SettingsDialog({
                             <div className="flex flex-row *:m-1">
                                 {difficultyArray.map((difficulty, index) => (
                                     <DialogPrimitive.Root key={index}>
-                                        <DialogPrimitive.Trigger>
+                                        <DialogPrimitive.Trigger asChild>
                                             <Button className="cursor-pointer">
                                                 {difficulty}
                                             </Button>

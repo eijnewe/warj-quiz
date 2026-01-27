@@ -16,6 +16,7 @@ import { ConfirmationPopup } from '@/components/confirmation-popup'
 import { DifficultyBar } from '@/components/difficulty-bar'
 import { PointBar } from '@/components/point-counter-component'
 import { DisplayProfile } from '@/components/display-profile'
+import { saveMemoryResult, getMemoryHistory } from "@/lib/storage";
 
 export const Route = createFileRoute('/memory/')({
   component: RouteComponent,
@@ -58,19 +59,18 @@ function RouteComponent() {
 
     setResult(newResult)
 
-    const prev = JSON.parse(localStorage.getItem('memoryResults') ?? '[]')
-
-    localStorage.setItem("memoryResults", JSON.stringify([...prev, newResult]));
+    saveMemoryResult({
+      points,
+      time: totalSeconds,
+      difficulty: "medium",
+      date: Date.now(),
+    });
   }, [minutes, seconds, points, pause, result]);
 
   // topplista (topp 5)
-  const topResults: {
-    score: number
-    time: number
-    date: string
-  }[] = JSON.parse(localStorage.getItem('memoryResults') ?? '[]')
-    .sort((a, b) => b.score - a.score)
-    .slice(0, 5)
+  const topResults = getMemoryHistory()
+    .sort((a, b) => b.points - a.points)
+    .slice(0, 5);
 
   const formatTime = (totalSeconds: number) => {
     const mins = Math.floor(totalSeconds / 60)
@@ -80,10 +80,10 @@ function RouteComponent() {
   }
 
   return (
-    <main>
+    <main className="p-4">
       <DialogPrimitive.Root defaultOpen={true}>
         <DialogPrimitive.Overlay className="fixed inset-0 bg-black/85 z-40" />
-        <DialogPrimitive.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-card/90 text-card-foreground border border-border p-6 rounded-lg shadow-lg z-60 flex flex-col text-center items-center *:m-2 border-2">
+        <DialogPrimitive.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-card/90 text-card-foreground border-border p-6 rounded-lg shadow-lg z-60 flex flex-col text-center items-center border-2">
           <DialogPrimitive.Close aria-label="Close" asChild>
             <Button className="cursor-pointer text-2xl p-7" onClick={start}>
               Starta Memoryspel!
@@ -122,7 +122,7 @@ function RouteComponent() {
             </TooltipContent>
           </Tooltip>
           <DialogPrimitive.Overlay className="fixed inset-0 bg-black/40 z-40" />
-          <DialogPrimitive.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg shadow-lg z-60 flex flex-col text-center items-center border-2">
+          <DialogPrimitive.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-6 rounded-lg shadow-lg dark-bg-amber-500 z-60 flex flex-col text-center items-center bg-card text-card-foreground border-2">
             <ConfirmationPopup linkTo="/" leaveGameMem onStart={start} />
           </DialogPrimitive.Content>
         </DialogPrimitive.Root>
@@ -147,30 +147,32 @@ function RouteComponent() {
         </DialogPrimitive.Root>
       </div>
 
-      <div className="flex flex-col *:items-start">
-        <div className="flex flex-row justify-between">
+      <div className="flex flex-col">
+        <div className="flex flex-row flex-wrap justify-between">
           <SettingsDialog onStart={start} onPause={pause} />
           <DifficultyBar />
-          <PointBar />
-          <TimerComponent
-            minutes={minutes}
-            seconds={seconds}
-            onStart={start}
-            onPause={pause}
-            isRunning={isRunning}
-          />
+          <PointBar points={points} />
+          <div className="ml-auto sm:ml-0">
+            <TimerComponent
+              minutes={minutes}
+              seconds={seconds}
+              onStart={start}
+              onPause={pause}
+              isRunning={isRunning}
+              isRow
+            />
+          </div>
         </div>
         <GridComponent
           onPointsChange={handlePointsChange}
           onGameComplete={finishGame}
         />
-        <Button onClick={finishGame} className="w-fit self-">
-          Visa resultat
-        </Button>
-
         {/* Resultat */}
         {result && (
-          <div className="mt-4 border p-3 rounded-lg text-right">
+          <div className="mt-4 justify-items-center">
+            <h2>
+              <span className="font-bold">Resultat:</span>
+            </h2>
             <p>
               <span className="font-bold">Poäng:</span> {result.score}
             </p>
@@ -191,19 +193,21 @@ function RouteComponent() {
           </div>
         )}
 
-        {/* Topplista */}
-        <h2 className="mt-6 font-bold">Topplista</h2>
+        <div className="mt-4 justify-items-center">
+          <h2 className="font-bold">Topplista</h2>
+          {topResults.length === 0 ? (
+            <p className="text-sm">Inga resultat ännu</p>
+          ) : (
+            <ol className="list-decimal pl-4 space-y-1">
+              {topResults.map((r, i) => (
+                <li key={i}>
+                  {r.points} p · {r.time}s
+                </li>
+              ))}
+            </ol>
+          )}
+        </div>
 
-        {topResults.length === 0 ?
-          <p className="text-sm">Inga resultat ännu</p>
-        : <ol>
-            {topResults.map((r, i) => (
-              <li key={i}>
-                {r.score} p · {r.time}s
-              </li>
-            ))}
-          </ol>
-        }
       </div>
     </main>
   );

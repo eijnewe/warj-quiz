@@ -10,12 +10,11 @@ export const Route = createRootRoute({
 function RootComponent() {
   const [scores, setScores] = React.useState([])
 
-
   return (
     <React.Fragment>
       <Header/>
       <Outlet context={{ scores, setScores }} /> 
-      <TanStackRouterDevtools></TanStackRouterDevtools>
+      <TanStackRouterDevtools toggleButtonProps={{ style: { display: 'none' } }}></TanStackRouterDevtools>
     </React.Fragment>
   )
 }

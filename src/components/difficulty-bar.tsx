@@ -27,7 +27,7 @@ export function DifficultyBar() {
 
   const selectedDifficulty = "Medel"; //placeholder selection
 
-  return (<div className="flex flex-row w-fit p-0.5 rounded-lg">
+  return (<div className="flex flex-row w-fit rounded-lg">
     {difficultyLevels.map((difficulty, index) => (
       <Tooltip key={index} >
         <TooltipTrigger asChild>
