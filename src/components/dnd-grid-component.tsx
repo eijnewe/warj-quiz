@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Draggable } from './draggable';
 import { Droppable } from './droppable';
 import { MatchArray } from '@/assets/data';
+import { ArrowDown } from 'lucide-react';
 
 export function DndGrid() {
   const [items] = useState(() => {
@@ -70,17 +71,20 @@ export function DndGrid() {
   const droppableSlots = ['1', '2', '3', '4', '5', '6'];
 
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col mt-2 h-full'>
       <DndContext onDragEnd={handleDragEnd}>
-        <div className='grid grid-cols-6 gap-2 justify-items-center'>
+        <div className='grid grid-cols-4 sm:grid-cols-6 grid-rows-3 sm:grid-rows-2 gap-2 justify-items-center'>
           {items.filter(item => parents[item.id] === null).map(item => (
             <Draggable key={item.id} id={item.id}>
-              <img src={item.src} alt={item.id} className='h-30 w-30 ratio-square rounded-lg drop-shadow-sm/40 z-10' />
+              <img src={item.src} alt={item.id} className='h-20 w-20 sm:h-30 sm:w-30 md:h-35 md:w-35 aspect-square rounded-lg drop-shadow-sm/40 z-10' />
             </Draggable>
           ))}
         </div>
-
-        <div className='grid grid-cols-3 *:m-2 justify-items-center'>
+        <span className='text-sm flex items-center justify-center pt-1 text-gray-500 dark:text-gray-200'>
+          Para ihop vargarna i rutorna nedan!
+          <ArrowDown className='h-3' />
+        </span>
+        <div className='grid grid-cols-3 justify-center *:m-1 justify-items-center'>
           {droppableSlots.map(slotId => (
             <Droppable key={slotId} id={slotId}>
               {Object.entries(parents)
@@ -89,7 +93,7 @@ export function DndGrid() {
                   const item = items.find(d => d.id === dragId)!;
                   return (
                     <Draggable key={dragId} id={dragId}>
-                      <img src={item.src} alt={item.id} className='h-25 w-25 rounded-lg drop-shadow-sm/30 m-1 z-10' />
+                      <img src={item.src} alt={item.id} className='h-14 sm:w-30 sm:h-30 aspect-square rounded-lg drop-shadow-sm/40 z-10' />
                     </Draggable>
                   );
                 })}

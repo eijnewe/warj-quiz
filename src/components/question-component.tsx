@@ -53,18 +53,14 @@ export function QuestionComponent({ onAnswer }: Props) {
   if (!question) return null
 
   return (
-    <div className="flex flex-col justify-center m-2 *:m-2">
-      <h1 className="font-bold uppercase mb-4 text-center">{question.question}</h1>
-      { (
+    <div className="flex flex-col justify-center m-2 *:m-2 items-center">
+      <h1 className="font-bold uppercase mb-4 text-center text-lg text-shadow-white text-shadow-lg/50 dark:text-shadow-4xl/80 dark:text-shadow-amber-900">{question.question}</h1>
+      {(
         answers.map((answer) => (
-          <Button key={answer.key} variant={"quiz"} className="cursor-pointer wrap-break-words whitespace-normal h-fit" onClick={() => handleClick(answer.key)}>
+          <Button key={answer.key} variant={"outline"} className="cursor-pointer wrap-break-words whitespace-normal h-fit drop-shadow-md w-[80vw] bg-card" onClick={() => handleClick(answer.key)}>
             {answer.value}
           </Button>
         ))
-        /*  <div className="flex justify-center items-center flex-col">
-          <Loader2 className="h-7 w-7 animate-spin" />
-          <span className="text-sm italic">Kalkylerar personlighet ...</span>
-        </div> */
       )}
     </div>
   );

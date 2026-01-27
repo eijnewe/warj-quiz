@@ -12,7 +12,10 @@ interface GridComponentProps {
   onGameComplete: () => void;
 }
 
-export function GridComponent({ onPointsChange, onGameComplete }: GridComponentProps) {
+export function GridComponent({ 
+  onPointsChange, 
+  onGameComplete, 
+}: GridComponentProps) {
   const [cards] = useState<Card[]>(() => {
     const doubledIcons = [...memoryIcons, ...memoryIcons];
     return doubledIcons
@@ -27,12 +30,7 @@ export function GridComponent({ onPointsChange, onGameComplete }: GridComponentP
   const [matchedCards, setMatchedCards] = useState<number[]>([]);
   const [wrongCards, setWrongCards] = useState<number[]>([]);
   const [isChecking, setIsChecking] = useState(false);
-
-  useEffect(() => {
-    if (matchedCards.length === cards.length && cards.length > 0) {
-      onGameComplete();
-    }
-  }, [matchedCards, cards.length, onGameComplete]);
+  
   
   useEffect(() => {
     setTimeout(() => {
@@ -42,12 +40,15 @@ export function GridComponent({ onPointsChange, onGameComplete }: GridComponentP
         const [firstIndex, secondIndex] = flippedCards;
         const firstCard = cards[firstIndex];
         const secondCard = cards[secondIndex];
-
+        
         if (firstCard.icon === secondCard.icon) {
           setMatchedCards((prev) => [...prev, firstIndex, secondIndex]);
           setFlippedCards([]);
           setIsChecking(false);
           onPointsChange(5);
+          console.log('match')
+          console.log(matchedCards)
+          console.log(flippedCards)
         } else {
           setWrongCards([firstIndex, secondIndex]);
           setTimeout(() => {
@@ -55,12 +56,13 @@ export function GridComponent({ onPointsChange, onGameComplete }: GridComponentP
             setFlippedCards([]);
             setIsChecking(false);
             onPointsChange(-1)
+            console.log('not a match')
           }, 700);
         }
       }
     }, 600);
   }, [flippedCards, cards, onPointsChange]);
-
+  
   const handleCardClick = (index: number) => {
     if (
       matchedCards.includes(index) ||
@@ -73,9 +75,15 @@ export function GridComponent({ onPointsChange, onGameComplete }: GridComponentP
     setFlippedCards((prev) => [...prev, index]);
   };
 
+  useEffect(() => {
+    if (matchedCards.length === cards.length) {
+      onGameComplete();
+    }
+  }, [matchedCards, cards.length, onGameComplete]);
+  
   return (
-    <main className="flex items-center justify-center p-4">
-      <div className="grid grid-cols-4 gap-4 max-w-2xl">
+    <div className="flex items-center justify-center px-3 sm:px-4 md:px-6 py-4">
+      <div className="grid grid-cols-4 gap-4 sm:gap-4 md:gap-5 max-w-lg sm:max-w-2xl w-full justify-items-center">
         {cards.map((card, index) => (
           <MemoryCard
             key={card.id}
@@ -89,6 +97,6 @@ export function GridComponent({ onPointsChange, onGameComplete }: GridComponentP
           />
         ))}
       </div>
-    </main>
+    </div>
   );
 }

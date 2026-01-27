@@ -18,7 +18,7 @@ export function ConfirmationPopup({
   restartGameMem?: boolean
 }) {
   return (
-    <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg shadow-lg z-60 flex flex-col text-center items-center border-2 w-[40vw]">
+    <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-card text-card-foreground border-border p-6 rounded-lg shadow-lg z-60 flex flex-col text-center items-center border-2 min-w-[60vw]">
       <h1>
         Är du säker på att du vill
         {chosenDiff || chosenPlayers ?
@@ -28,26 +28,26 @@ export function ConfirmationPopup({
               starta ett nytt spel med{' '}
               <span className="lowercase font-bold">{chosenPlayers}</span>?
             </>
-          : <>
+            : <>
               {' '}
               starta ett nytt spel på{' '}
               <span className="lowercase font-bold">{chosenDiff}</span>{' '}
               svårighetsgrad?
             </>
 
-        : <> lämna spelet?</>}
+          : <> lämna spelet?</>}
       </h1>
       <div className="flex *:m-1 mt-2">
-        <Link to={linkTo}>
-          <Button
-            className="cursor-pointer"
-            onClick={
-              restartGameMem ? () => globalThis.location.reload() : undefined
-            }
-          >
+        <Button asChild
+          className="cursor-pointer"
+          onClick={
+            restartGameMem ? () => globalThis.location.reload() : undefined
+          }
+        >
+          <Link to={linkTo}>
             Ja
-          </Button>
-        </Link>
+          </Link>
+        </Button>
         <DialogPrimitive.Close aria-label="Close" className="self-end" asChild>
           <Button
             className="cursor-pointer"
