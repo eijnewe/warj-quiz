@@ -1,7 +1,6 @@
 import { Dice1, Dice3, Dice6 } from "lucide-react";
 import type React from "react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
-import { useState } from "react";
 
 type Difficulty = {
   grade: string;

@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/tooltip'
 import { Dialog as DialogPrimitive } from "radix-ui"
 import { Button } from '@/components/ui/button'
-import { ArrowLeft, CircleQuestionMark, Pointer, RotateCcw, Settings, X } from 'lucide-react'
+import { ArrowLeft, CircleQuestionMark, Pointer, RotateCcw, X } from 'lucide-react'
 import { DndGrid } from '@/components/dnd-grid-component';
 import { SettingsDialog } from '@/components/settings-component';
 
@@ -33,16 +33,16 @@ function RouteComponent({
     return <main className='p-4'>
         <DialogPrimitive.Root defaultOpen={true}>
             <DialogPrimitive.Overlay className="fixed inset-0 bg-black/85 z-40" />
-            <DialogPrimitive.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-card/90 text-card-foreground border-border p-6 rounded-lg shadow-lg z-60 flex flex-col text-center items-center border-2">
+            <DialogPrimitive.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-card/90 text-card-foreground border-border p-6 rounded-lg shadow-lg z-60 flex flex-col text-center items-center border-2 *:m-2">
                 <DialogPrimitive.Close aria-label="Close" asChild>
-                    <Button className="cursor-pointer text-2xl p-7" onClick={start}>
+                    <Button className="text-2xl p-7" onClick={start}>
                         Spela Matcha Varg!
                         <Pointer />
                     </Button>
                 </DialogPrimitive.Close>
                 <Button
                     variant={'default'}
-                    className=" m-1 h-8 p-0.5 text-xs cursor-pointer"
+                    className="m-1 h-8 p-0.5 text-xs"
                     onClick={() => router.history.back()}
                 >
                     <ArrowLeft />
@@ -55,7 +55,7 @@ function RouteComponent({
                 <Tooltip>
                     <TooltipTrigger asChild>
                         <DialogPrimitive.Trigger>
-                            <Button className="cursor-pointer" variant={'ghost'} onClick={pause}>
+                            <Button variant={'ghost'} onClick={pause}>
                                 <ArrowLeft />
                             </Button>
                         </DialogPrimitive.Trigger>
@@ -95,7 +95,7 @@ function RouteComponent({
                 <Tooltip>
                     <TooltipTrigger asChild>
                         <DialogPrimitive.Trigger asChild>
-                            <Button className="cursor-pointer m-1 w-8 h-8 p-0.5  hover:bg-amber-300 hover:text-black border-2 drop-shadow-sm/30 rounded-lg border-black">
+                            <Button className="m-1 w-8 h-8 p-0.5  hover:bg-amber-300 hover:text-black border-2 drop-shadow-sm/30 rounded-lg border-black">
                                 <CircleQuestionMark />
                             </Button>
                         </DialogPrimitive.Trigger>
@@ -105,9 +105,9 @@ function RouteComponent({
                     </TooltipContent>
                 </Tooltip>
                 <DialogPrimitive.Overlay className="fixed inset-0 bg-black/85 z-40" />
-                <DialogPrimitive.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-card/90 text-card-foreground border-border p-6 rounded-lg shadow-lg z-60 flex flex-col items-center *:m-2 border-2 text-sm sm:w-[80vw]">
+                <DialogPrimitive.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-card/90 text-card-foreground border-border p-3 rounded-lg shadow-lg z-60 flex flex-col items-center *:m-2 border-2 text-sm sm:w-[60vw] w-[80%]">
                     <DialogPrimitive.Close aria-label="Close" className="self-end">
-                        <Button className="cursor-pointer w-7 h-7" onClick={isMainMenu ? onPause : onStart}
+                        <Button className="w-7 h-7" onClick={isMainMenu ? onPause : onStart}
                         >
                             <X />
                         </Button>

@@ -15,7 +15,6 @@ import { SettingsDialog } from '@/components/settings-component'
 import { ConfirmationPopup } from '@/components/confirmation-popup'
 import { DifficultyBar } from '@/components/difficulty-bar'
 import { PointBar } from '@/components/point-counter-component'
-import { DisplayProfile } from '@/components/display-profile'
 import { saveMemoryResult, getMemoryHistory } from "@/lib/storage";
 
 export const Route = createFileRoute('/memory/')({
@@ -39,20 +38,34 @@ function RouteComponent() {
   // state för resultat
   const [result, setResult] = useState<{
     score: number
+    speedBonus: number
+    totalScore: number
     time: number
     date: string
   } | null>(null)
 
+  // Bonuspoäng för tid 
+  const calculateSpeedBonus = (totalSeconds: number): number => {
+    if (totalSeconds <= 30) return 50;
+    if (totalSeconds <= 45) return 40;
+    if (totalSeconds <= 60) return 30;
+    if (totalSeconds <= 90) return 20;
+    if (totalSeconds <= 120) return 10;
+  }
+
   // funktion för att avsluta spelet och spara resultat
-  const finishGame = useCallback(() => {
+  const finishGame = useCallback((totalSeconds: number) => {
     if (result) return;
 
     pause();
 
-    const totalSeconds = minutes * 60 + seconds;
+    const speedBonus = calculateSpeedBonus(totalSeconds)
+    const totalScore = points + speedBonus;
 
     const newResult = {
       score: points,
+      speedBonus,
+      totalScore,
       time: totalSeconds,
       date: new Date().toISOString(),
     }
@@ -60,12 +73,12 @@ function RouteComponent() {
     setResult(newResult)
 
     saveMemoryResult({
-      points,
+      points: totalScore,
       time: totalSeconds,
       difficulty: "medium",
       date: Date.now(),
     });
-  }, [minutes, seconds, points, pause, result]);
+  }, [points, pause, result]);
 
   // topplista (topp 5)
   const topResults = getMemoryHistory()
@@ -79,13 +92,15 @@ function RouteComponent() {
     return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`
   }
 
+  const currentTotalSeconds = minutes * 60 + seconds;
+
   return (
-    <main className="p-4">
+    <main className="p-4 ">
       <DialogPrimitive.Root defaultOpen={true}>
         <DialogPrimitive.Overlay className="fixed inset-0 bg-black/85 z-40" />
-        <DialogPrimitive.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-card/90 text-card-foreground border-border p-6 rounded-lg shadow-lg z-60 flex flex-col text-center items-center border-2">
+        <DialogPrimitive.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-card/90 text-card-foreground border-border p-6 rounded-lg shadow-lg z-60 flex flex-col text-center items-center border-2 *:m-2">
           <DialogPrimitive.Close aria-label="Close" asChild>
-            <Button className="cursor-pointer text-2xl p-7" onClick={start}>
+            <Button className="text-2xl p-7" onClick={start}>
               Starta Memoryspel!
               <Pointer />
             </Button>
@@ -93,7 +108,7 @@ function RouteComponent() {
           <div className="flex flex-row items-start">
             <Button
               variant={'default'}
-              className=" m-1 h-8 p-0.5 text-xs cursor-pointer"
+              className=" m-1 h-8 p-0.5 text-xs"
               onClick={() => router.history.back()}
             >
               <ArrowLeft />
@@ -109,7 +124,6 @@ function RouteComponent() {
             <TooltipTrigger asChild>
               <DialogPrimitive.Trigger asChild>
                 <Button
-                  className="cursor-pointer"
                   variant={'ghost'}
                   onClick={pause}
                 >
@@ -166,6 +180,7 @@ function RouteComponent() {
         <GridComponent
           onPointsChange={handlePointsChange}
           onGameComplete={finishGame}
+          totalSeconds={currentTotalSeconds}
         />
         {/* Resultat */}
         {result && (
@@ -174,7 +189,13 @@ function RouteComponent() {
               <span className="font-bold">Resultat:</span>
             </h2>
             <p>
-              <span className="font-bold">Poäng:</span> {result.score}
+              <span className="font-bold">Poäng från matchningar:</span> {result.score}
+            </p>
+            <p>
+              <span className="font-bold">Hastighetsbonus:</span> {result.speedBonus}
+            </p>
+            <p>
+              <span className="font-bold">Total poäng:</span> <span className="text-lg font-bold">{result.totalScore}</span>
             </p>
             <p>
               <span className="font-bold">Tid:</span>{" "}
