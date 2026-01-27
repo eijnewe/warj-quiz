@@ -17,9 +17,9 @@ export const MemoryCard = ({
   isGameComplete,
   onClick,
 }: MemoryCardProps) => {
-  const targetRotation = isGameComplete ? 540 : isFlipped ? 180 : 0;
+  const targetRotation = isGameComplete ? 900 : isFlipped ? 180 : 0;
   const spinTransition = isGameComplete
-    ? { duration: 2, ease: "easeInOut" }
+    ? { duration: 3, ease: "easeInOut" }
     : { duration: 0.6, ease: "easeInOut" };
   return (
     <div
